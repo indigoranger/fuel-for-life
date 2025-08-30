@@ -43,13 +43,143 @@
   .modal { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; border-radius: 16px; flex-direction: column; color: #fff; font-size: 18px; text-align: center; padding: 20px; display: none; }
   .modal h2 { font-size: 24px; margin-bottom: 15px; color: #ff5555; }
   .modal button { margin-top: 20px; padding: 10px 20px; background: #ffcc00; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
+
+  /* Splash Screen */
+  .splash-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #1e1e2f;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    padding: 20px;
+  }
+  .splash-screen h1 { font-size: 32px; color: #ffcc00; margin-bottom: 10px; }
+  .splash-screen button { padding: 12px 24px; font-size: 18px; border-radius: 12px; border: none; background: #ffcc00; color: #1e1e2f; font-weight: bold; cursor: pointer; transition: 0.2s; }
+  .splash-screen button:hover { background: #ffd633; }
+  .splash-screen a { color: #ffd633; text-decoration: underline; cursor: pointer; font-size: 16px; }
+
+  /* Instructions Screen */
+  .instructions-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #1e1e2f;
+    border-radius: 16px;
+    z-index: 11;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+  .instructions-screen h2 { font-size: 26px; color: #ffcc00; margin-bottom: 10px; text-align: center; }
+  .instructions-screen h3 { font-size: 18px; color: #ffd633; margin-top: 15px; margin-bottom: 5px; }
+  .instructions-screen p { margin-bottom: 12px; line-height: 1.6; color: #ccc; }
+  .instructions-screen ul { margin-left: 15px; line-height: 1.6; margin-bottom: 12px; }
+  .instructions-screen li { margin-bottom: 6px; }
+  .instructions-screen .back-btn {
+    position: sticky;
+    bottom: 10px;
+    background: #ffcc00;
+    color: #1e1e2f;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 15px;
+  }
+  .instructions-screen .back-btn:hover { background: #ffd633; }
+
+  /* Scrollbar Styling */
+  .instructions-screen::-webkit-scrollbar {
+    width: 8px;
+  }
+  .instructions-screen::-webkit-scrollbar-track {
+    background: #1e1e2f;
+    border-radius: 4px;
+  }
+  .instructions-screen::-webkit-scrollbar-thumb {
+    background: #ffd633;
+    border-radius: 4px;
+  }
+  .instructions-screen::-webkit-scrollbar-thumb:hover {
+    background: #ffcc00;
+  }
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 15px;
+  }
+  .instructions-screen .back-btn:hover { background: #ffd633; }
 </style>
 </head>
 <body>
 
 <div class="game-container">
+  <div class="splash-screen" id="splash-screen">
+    <h1>Fuel for Life</h1>
+    <p>Balance your nutrients, keep your body healthy, and survive as long as you can!</p>
+    <button onclick="startGame()">Start Game</button>
+    <a onclick="showInstructions()">Instructions</a>
+  </div>
+
+  <div class="instructions-screen" id="instructions-screen" style="display:none;">
+    <h2>Fuel for Life - Instructions</h2>
+    <p>Welcome! Your goal is to maintain a healthy balance of nutrients, manage your money, and enjoy your meals. Make strategic choices to survive as long as possible.</p>
+
+    <h3>Basic Rules</h3>
+    <ul>
+      <li>Eat three meals per day: Breakfast, Lunch, Dinner.</li>
+      <li>Each meal has a cost. If you cannot afford any meal, the game ends.</li>
+      <li>Meals affect Carbs, Protein, Fat, Vitamins, Fullness, and Pleasure.</li>
+      <li>Fullness and Pleasure need to stay in healthy ranges to avoid penalties.</li>
+    </ul>
+
+    <h3>Nutrition Guide</h3>
+    <ul>
+      <li>Carbs provide energy but excessive carbs increase fat.</li>
+      <li>Protein builds muscle and helps recovery.</li>
+      <li>Fat impacts weight. Too little or too much is unhealthy.</li>
+      <li>Vitamins improve overall health and well-being.</li>
+      <li>Pleasure influences happiness. Low pleasure reduces satisfaction.</li>
+    </ul>
+
+    <h3>Gameplay Tips</h3>
+    <ul>
+      <li>Balance nutrients; do not focus only on one.</li>
+      <li>Track money to ensure you can buy food daily.</li>
+      <li>Use high-protein meals to counteract low protein levels.</li>
+      <li>Combine foods to maintain fullness without overspending.</li>
+      <li>Keep an eye on fat levels; weight changes with fat.</li>
+    </ul>
+
+    <h3>Hints & Strategy</h3>
+    <ul>
+      <li>Rotate meals to prevent nutrient depletion.</li>
+      <li>High pleasure foods improve satisfaction but may unbalance fullness.</li>
+      <li>Plan purchases to avoid running out of money mid-day.</li>
+      <li>Monitor all meters; falling too low in any can end the game faster.</li>
+    </ul>
+
+    <button class="back-btn" onclick="backToSplash()">Back</button>
+  </div>
+
   <div class="top-bar">
-    <div class="metric">⚖️ 70kg</div>
+    <div class="metric" id="weight-display">⚖️ 70kg</div>
     <div class="metric" id="money-display">💰 $200</div>
   </div>
 
@@ -109,9 +239,31 @@ const foodCatalog = [
   {name:"Soft Drink", effects:{carbs:15, protein:-2, fat:0, vit:-2, fullness:2, pleasure:10}, nutrients:["carbs","protein","vit"], cost:6}
 ];
 
-let fullness = 50, pleasure = 50, carbs = 50, protein = 50, fat = 25, vit = 50, money = 200;
+let fullness = 50, pleasure = 50, carbs = 50, protein = 50, fat = 25, vit = 50, money = 230;
 let day = 1, mealsEaten = 0;
 const mealTitles = ["Breakfast","Lunch","Dinner"];
+
+function startGame() {
+  document.getElementById('splash-screen').style.display = 'none';
+  document.getElementById('instructions-screen').style.display = 'none';
+  updateMeters();
+  renderMeals();
+}
+
+function showInstructions() {
+  document.getElementById('splash-screen').style.display = 'none';
+  document.getElementById('instructions-screen').style.display = 'flex';
+}
+
+function backToSplash() {
+  document.getElementById('instructions-screen').style.display = 'none';
+  document.getElementById('splash-screen').style.display = 'flex';
+}
+
+function updateWeight() {
+  const weight = 40 + (fat / 100) * (110 - 40);
+  document.getElementById('weight-display').textContent = `⚖️ ${Math.round(weight)}kg`;
+}
 
 function updateMeters() {
   function meterColor(value, type) {
@@ -128,6 +280,7 @@ function updateMeters() {
     }
     return '#7c4dff';
   }
+
   document.getElementById('fullness-fill').style.width = fullness + '%';
   document.getElementById('fullness-fill').style.backgroundColor = meterColor(fullness, 'fullness');
   document.getElementById('pleasure-fill').style.width = pleasure + '%';
@@ -141,37 +294,7 @@ function updateMeters() {
   document.getElementById('vit-fill').style.width = vit + '%';
   document.getElementById('vit-fill').style.backgroundColor = meterColor(vit, 'vit');
   document.getElementById('money-display').textContent = `💰 $${money}`;
-}
-
-function clampValues() {
-  fullness = Math.min(100, Math.max(0, fullness));
-  pleasure = Math.min(100, Math.max(0, pleasure));
-  carbs = Math.min(100, Math.max(0, carbs));
-  protein = Math.min(100, Math.max(0, protein));
-  fat = Math.min(100, Math.max(0, fat));
-  vit = Math.min(100, Math.max(0, vit));
-  money = Math.max(0, money);
-
-  if(carbs >= 100) { carbs = 50; fat += 2; if(fat > 100) fat = 100; }
-}
-
-function checkGameOver() {
-  let message = '';
-  if (pleasure <= 0) message = "Your pleasure dropped to zero. You fell into depression!";
-  else if (carbs <= 0) message = "You have starved of carbs. You developed fatigue!";
-  else if (fullness <+ 0) message = "You starved to death! You didn't eat enough to survive.";
-  else if (protein <= 0) message = "You have no protein left. You developed muscle wasting!";
-  else if (fat <= 0 || fat >= 100) message = "Your fat level is critical. Game over!";
-  else if (vit <= 0) message = "You have no vitamins left. You got scurvy!";
-  else if (!foodCatalog.some(f => f.cost <= money)) message = "You cannot afford any more meals!";
-
-  if (message) {
-    document.getElementById('game-over-msg').textContent = "Game Over! " + message;
-    document.getElementById('game-over-modal').style.display = 'flex';
-    document.getElementById('meal-options').innerHTML = '';
-    return true;
-  }
-  return false;
+  updateWeight();
 }
 
 function getRandomMeals() {
@@ -188,14 +311,15 @@ function getRandomMeals() {
 }
 
 function renderMeals() {
-  if (checkGameOver()) return;
   const mealsDiv = document.getElementById('meal-options');
   mealsDiv.innerHTML = '';
   const options = getRandomMeals();
   const mealTitle = mealTitles[mealsEaten % 3];
   document.getElementById('current-meal').textContent = `Day ${day} - ${mealTitle}`;
 
-  options.forEach((food) => {
+  let affordable = false;
+
+  options.forEach(food => {
     const btn = document.createElement('button');
     btn.className = 'meal-btn';
     const icons = [];
@@ -206,39 +330,54 @@ function renderMeals() {
 
     btn.innerHTML = `${food.name} <span class="cost">$${food.cost}</span>
       <div class="nutrients">${icons.join(' ')}</div>`;
-    btn.onclick = () => eatMeal(food);
+
+    if(money >= food.cost) {
+      affordable = true;
+      btn.onclick = () => eatMeal(food);
+    } else {
+      btn.disabled = true;
+      btn.style.opacity = 0.5;
+    }
+
     mealsDiv.appendChild(btn);
   });
+
+  if(!affordable) showGameOver("You can't afford any meals!");
 }
 
 function eatMeal(food) {
-  if (money >= food.cost) {
-    // Apply nutrients
-    food.nutrients.forEach(n => {
-      switch(n) {
-        case 'carbs': carbs += food.effects.carbs; break;
-        case 'protein': protein += food.effects.protein; break;
-        case 'fat': fat += food.effects.fat; break;
-        case 'vit': vit += food.effects.vit; break;
-      }
-    });
-    // Apply meal fullness first, then decrease by 70
-    fullness += food.effects.fullness;
-    fullness -= 12;
-
-    pleasure += food.effects.pleasure;
-    money -= food.cost;
-
-    mealsEaten++;
-    if (mealsEaten % 3 === 0) {
-      day++;
-      if (day % 8 === 0) money += 150;
+  food.nutrients.forEach(n => {
+    switch(n) {
+      case 'carbs': carbs += food.effects.carbs; break;
+      case 'protein': protein += food.effects.protein; break;
+      case 'fat': fat += food.effects.fat; break;
+      case 'vit': vit += food.effects.vit; break;
     }
+  });
+  fullness += food.effects.fullness - 12;
+  pleasure += food.effects.pleasure;
+  money -= food.cost;
 
-    clampValues();
-    updateMeters();
-    renderMeals();
-  } else alert("Not enough money!");
+  mealsEaten++;
+  if(mealsEaten % 3 === 0) day++;
+  clampValues();
+  updateMeters();
+  renderMeals();
+}
+
+function clampValues() {
+  fullness = Math.min(100, Math.max(0, fullness));
+  pleasure = Math.min(100, Math.max(0, pleasure));
+  carbs = Math.min(100, Math.max(0, carbs));
+  protein = Math.min(100, Math.max(0, protein));
+  fat = Math.min(100, Math.max(0, fat));
+  vit = Math.min(100, Math.max(0, vit));
+  money = Math.max(0, money);
+}
+
+function showGameOver(msg) {
+  document.getElementById('game-over-msg').textContent = msg;
+  document.getElementById('game-over-modal').style.display = 'flex';
 }
 
 function restartGame() {
@@ -248,9 +387,6 @@ function restartGame() {
   updateMeters();
   renderMeals();
 }
-
-renderMeals();
-updateMeters();
 </script>
 </body>
 </html>
