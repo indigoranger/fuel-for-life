@@ -335,6 +335,12 @@ function eatMeal(food) {
   mealsEaten++;
   if(mealsEaten % 3 === 0) day++;
 
+  // Add weekly allowance after every 7th day dinner
+  if(mealsEaten % 21 === 0) { // 7 days * 3 meals = 21 meals
+    money += 150;
+    alert("You received your weekly allowance of $150!");
+  }
+
   // Track consecutive full meals for food poisoning
   if(fullness >= 100) consecutiveFullnessMax++;
   else consecutiveFullnessMax = 0;
@@ -344,6 +350,7 @@ function eatMeal(food) {
   updateMeters();
   renderMeals();
 }
+
 
 function clampValues() {
   // Carb overload logic
