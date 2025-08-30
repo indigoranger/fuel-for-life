@@ -356,7 +356,7 @@ function clampValues() {
   // Carb overload logic
   if(carbs > 100) {
     carbs = 50;
-    fat = Math.min(100, fat + 10);
+    fat = Math.min(100, fat + 4);
     alert("Your body converted excess carbs to fat.");
   }
 
