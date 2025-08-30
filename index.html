@@ -8,21 +8,19 @@
   body {
   margin: 0;
   font-family: 'Roboto', 'Segoe UI', sans-serif;
-  background: #1e1e2f; /* Match game container background */
+  background: #1e1e2f;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #fff;
 }
-
-
 .game-container {
   width: 100%;
   max-width: 360px;
   height: 100%;
   max-height: 640px;
-  background: #1e1e2f; /* keep if you want */
+  background: #1e1e2f;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -30,109 +28,81 @@
   box-sizing: border-box;
   position: relative;
 }
-
-
-
-  .top-bar { display: flex; justify-content: space-between; font-size: 16px; font-weight: 500; margin-bottom: 12px; }
-  .metric { display: flex; align-items: center; gap: 5px; }
-  .current-meal { text-align: center; font-size: 20px; font-weight: 600; margin-top: 10px; margin-bottom: 15px; color: #ffcc00; }
-  .meter-container { margin-bottom: 12px; }
-  .meter-label { font-size: 13px; margin-bottom: 3px; color: #ccc; display: flex; align-items: center; gap:5px; }
-  .meter { width: 100%; height: 18px; background: #333; border-radius: 8px; overflow: hidden; position: relative; }
-  .meter-fill { height: 100%; width: 50%; transition: width 0.3s, background-color 0.3s; border-radius: 8px; position: absolute; left:0; top:0; }
-  .meters-grid { display: flex; justify-content: space-between; margin-bottom: 15px; }
-  .small-meter { width: 48%; }
-  .meal-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
-  .meal-btn { padding: 12px; background: #2c2c3e; border: none; border-radius: 12px; font-size: 15px; cursor: pointer; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.5); transition: 0.2s; color: #fff; }
-  .meal-btn:hover { background: #3d3d55; transform: translateY(-2px); }
-  .nutrients { font-size: 18px; display: flex; gap: 8px; justify-content: center; margin-top: 5px; color: #bbb; }
-  .cost { font-weight: bold; color: #ffd700; margin-top: 5px; }
-  .meal-title { font-weight: bold; margin-bottom: 5px; color: #ffcc00; font-size: 14px; }
-  .modal { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; border-radius: 16px; flex-direction: column; color: #fff; font-size: 18px; text-align: center; padding: 20px; display: none; }
-  .modal h2 { font-size: 24px; margin-bottom: 15px; color: #ff5555; }
-  .modal button { margin-top: 20px; padding: 10px 20px; background: #ffcc00; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
-
-  /* Splash Screen */
-  .splash-screen {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: #1e1e2f;
-    border-radius: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    z-index: 10;
-    color: #fff;
-    font-size: 18px;
-    text-align: center;
-    padding: 20px;
-  }
-  .splash-screen h1 { font-size: 32px; color: #ffcc00; margin-bottom: 10px; }
-  .splash-screen button { padding: 12px 24px; font-size: 18px; border-radius: 12px; border: none; background: #ffcc00; color: #1e1e2f; font-weight: bold; cursor: pointer; transition: 0.2s; }
-  .splash-screen button:hover { background: #ffd633; }
-  .splash-screen a { color: #ffd633; text-decoration: underline; cursor: pointer; font-size: 16px; }
-
-  /* Instructions Screen */
-  .instructions-screen {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: #1e1e2f;
-    border-radius: 16px;
-    z-index: 11;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    font-size: 14px;
-  }
-  .instructions-screen h2 { font-size: 26px; color: #ffcc00; margin-bottom: 10px; text-align: center; }
-  .instructions-screen h3 { font-size: 18px; color: #ffd633; margin-top: 15px; margin-bottom: 5px; }
-  .instructions-screen p { margin-bottom: 12px; line-height: 1.6; color: #ccc; }
-  .instructions-screen ul { margin-left: 15px; line-height: 1.6; margin-bottom: 12px; }
-  .instructions-screen li { margin-bottom: 6px; }
-  .instructions-screen .back-btn {
-    position: sticky;
-    bottom: 10px;
-    background: #ffcc00;
-    color: #1e1e2f;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    align-self: center;
-    margin-top: 15px;
-  }
-  .instructions-screen .back-btn:hover { background: #ffd633; }
-
-  /* Scrollbar Styling */
-  .instructions-screen::-webkit-scrollbar {
-    width: 8px;
-  }
-  .instructions-screen::-webkit-scrollbar-track {
-    background: #1e1e2f;
-    border-radius: 4px;
-  }
-  .instructions-screen::-webkit-scrollbar-thumb {
-    background: #ffd633;
-    border-radius: 4px;
-  }
-  .instructions-screen::-webkit-scrollbar-thumb:hover {
-    background: #ffcc00;
-  }
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    align-self: center;
-    margin-top: 15px;
-  }
-  .instructions-screen .back-btn:hover { background: #ffd633; }
+.top-bar { display: flex; justify-content: space-between; font-size: 16px; font-weight: 500; margin-bottom: 12px; }
+.metric { display: flex; align-items: center; gap: 5px; }
+.current-meal { text-align: center; font-size: 20px; font-weight: 600; margin-top: 10px; margin-bottom: 15px; color: #ffcc00; }
+.meter-container { margin-bottom: 12px; }
+.meter-label { font-size: 13px; margin-bottom: 3px; color: #ccc; display: flex; align-items: center; gap:5px; }
+.meter { width: 100%; height: 18px; background: #333; border-radius: 8px; overflow: hidden; position: relative; }
+.meter-fill { height: 100%; width: 50%; transition: width 0.3s, background-color 0.3s; border-radius: 8px; position: absolute; left:0; top:0; }
+.meters-grid { display: flex; justify-content: space-between; margin-bottom: 15px; }
+.small-meter { width: 48%; }
+.meal-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+.meal-btn { padding: 12px; background: #2c2c3e; border: none; border-radius: 12px; font-size: 15px; cursor: pointer; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.5); transition: 0.2s; color: #fff; }
+.meal-btn:hover { background: #3d3d55; transform: translateY(-2px); }
+.nutrients { font-size: 18px; display: flex; gap: 8px; justify-content: center; margin-top: 5px; color: #bbb; }
+.cost { font-weight: bold; color: #ffd700; margin-top: 5px; }
+.meal-title { font-weight: bold; margin-bottom: 5px; color: #ffcc00; font-size: 14px; }
+.modal { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; border-radius: 16px; flex-direction: column; color: #fff; font-size: 18px; text-align: center; padding: 20px; display: none; }
+.modal h2 { font-size: 24px; margin-bottom: 15px; color: #ff5555; }
+.modal button { margin-top: 20px; padding: 10px 20px; background: #ffcc00; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
+.splash-screen {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #1e1e2f;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+  color: #fff;
+  font-size: 18px;
+  text-align: center;
+  padding: 20px;
+}
+.splash-screen h1 { font-size: 32px; color: #ffcc00; margin-bottom: 10px; }
+.splash-screen button { padding: 12px 24px; font-size: 18px; border-radius: 12px; border: none; background: #ffcc00; color: #1e1e2f; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.splash-screen button:hover { background: #ffd633; }
+.splash-screen a { color: #ffd633; text-decoration: underline; cursor: pointer; font-size: 16px; }
+.instructions-screen {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #1e1e2f;
+  border-radius: 16px;
+  z-index: 11;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  font-size: 14px;
+}
+.instructions-screen h2 { font-size: 26px; color: #ffcc00; margin-bottom: 10px; text-align: center; }
+.instructions-screen h3 { font-size: 18px; color: #ffd633; margin-top: 15px; margin-bottom: 5px; }
+.instructions-screen p { margin-bottom: 12px; line-height: 1.6; color: #ccc; }
+.instructions-screen ul { margin-left: 15px; line-height: 1.6; margin-bottom: 12px; }
+.instructions-screen li { margin-bottom: 6px; }
+.instructions-screen .back-btn {
+  position: sticky;
+  bottom: 10px;
+  background: #ffcc00;
+  color: #1e1e2f;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 15px;
+}
+.instructions-screen .back-btn:hover { background: #ffd633; }
+.instructions-screen::-webkit-scrollbar { width: 8px; }
+.instructions-screen::-webkit-scrollbar-track { background: #1e1e2f; border-radius: 4px; }
+.instructions-screen::-webkit-scrollbar-thumb { background: #ffd633; border-radius: 4px; }
+.instructions-screen::-webkit-scrollbar-thumb:hover { background: #ffcc00; }
 </style>
 </head>
 <body>
@@ -148,7 +118,6 @@
   <div class="instructions-screen" id="instructions-screen" style="display:none;">
     <h2>Fuel for Life - Instructions</h2>
     <p>Welcome! Your goal is to maintain a healthy balance of nutrients, manage your money, and enjoy your meals. Make strategic choices to survive as long as possible.</p>
-
     <h3>Basic Rules</h3>
     <ul>
       <li>Eat three meals per day: Breakfast, Lunch, Dinner.</li>
@@ -156,7 +125,6 @@
       <li>Meals affect Carbs, Protein, Fat, Vitamins, Fullness, and Pleasure.</li>
       <li>Fullness and Pleasure need to stay in healthy ranges to avoid penalties.</li>
     </ul>
-
     <h3>Nutrition Guide</h3>
     <ul>
       <li>Carbs provide energy but excessive carbs increase fat.</li>
@@ -165,7 +133,6 @@
       <li>Vitamins improve overall health and well-being.</li>
       <li>Pleasure influences happiness. Low pleasure reduces satisfaction.</li>
     </ul>
-
     <h3>Gameplay Tips</h3>
     <ul>
       <li>Balance nutrients; do not focus only on one.</li>
@@ -174,7 +141,6 @@
       <li>Combine foods to maintain fullness without overspending.</li>
       <li>Keep an eye on fat levels; weight changes with fat.</li>
     </ul>
-
     <h3>Hints & Strategy</h3>
     <ul>
       <li>Rotate meals to prevent nutrient depletion.</li>
@@ -182,7 +148,6 @@
       <li>Plan purchases to avoid running out of money mid-day.</li>
       <li>Monitor all meters; falling too low in any can end the game faster.</li>
     </ul>
-
     <button class="back-btn" onclick="backToSplash()">Back</button>
   </div>
 
@@ -234,21 +199,22 @@
 
 <script>
 const foodCatalog = [
-  {name:"Oatmeal", effects:{carbs:10, protein:3, fat:1, vit:5, fullness:15, pleasure:-10}, nutrients:["carbs","protein","fat","vit"], cost:11},
+  {name:"Oatmeal", effects:{carbs:10, protein:3, fat:1, vit:5, fullness:15, pleasure:-10}, nutrients:["carbs","protein","fat","vit"], cost:10},
   {name:"Burger", effects:{carbs:15, protein:8, fat:7, vit:2, fullness:20, pleasure:10}, nutrients:["carbs","protein","fat","vit"], cost:15},
-  {name:"Salad", effects:{carbs:5, protein:-2, fat:0, vit:15, fullness:10, pleasure:-15}, nutrients:["carbs","protein","fat","vit"], cost:10},
+  {name:"Salad", effects:{carbs:5, protein:-2, fat:0, vit:15, fullness:10, pleasure:-15}, nutrients:["carbs","protein","fat","vit"], cost:8},
   {name:"Pizza", effects:{carbs:20, protein:5, fat:9, vit:1, fullness:25, pleasure:12}, nutrients:["carbs","protein","fat","vit"], cost:17},
-  {name:"Grilled Chicken", effects:{protein:18, fat:3, vit:8, fullness:18, pleasure:5}, nutrients:["protein","fat","vit"], cost:18},
-  {name:"Fries", effects:{carbs:15, protein:-5, fat:5, vit:-2, fullness:15, pleasure:10}, nutrients:["carbs","protein","fat","vit"], cost:9},
-  {name:"Apple", effects:{carbs:8, protein:-1, vit:8, fullness:3, pleasure:-10}, nutrients:["carbs","protein","vit"], cost:8},
-  {name:"Banana", effects:{carbs:10, protein:-1, vit:8, fullness:2, pleasure:-10}, nutrients:["carbs","protein","vit"], cost:8},
-  {name:"Yogurt", effects:{carbs:5, protein:8, fat:1, fullness:4, pleasure:3}, nutrients:["carbs","protein","fat"], cost:9},
-  {name:"Candy Bar", effects:{carbs:12, protein:-3, fat:3, vit:-3, fullness:5, pleasure:15}, nutrients:["carbs","protein","fat","vit"], cost:7},
-  {name:"Soft Drink", effects:{carbs:15, protein:-2, fat:0, vit:-2, fullness:2, pleasure:10}, nutrients:["carbs","protein","vit"], cost:6}
+  {name:"Grilled Chicken", effects:{protein:18, fat:3, vit:8, fullness:18, pleasure:5}, nutrients:["protein","fat","vit"], cost:12},
+  {name:"Fries", effects:{carbs:15, protein:-5, fat:5, vit:-2, fullness:15, pleasure:10}, nutrients:["carbs","protein","fat","vit"], cost:7},
+  {name:"Apple", effects:{carbs:8, protein:-1, vit:8, fullness:3, pleasure:-10}, nutrients:["carbs","protein","vit"], cost:3},
+  {name:"Banana", effects:{carbs:10, protein:-1, vit:8, fullness:2, pleasure:-10}, nutrients:["carbs","protein","vit"], cost:2},
+  {name:"Yogurt", effects:{carbs:5, protein:8, fat:1, fullness:4, pleasure:3}, nutrients:["carbs","protein","fat"], cost:4},
+  {name:"Candy Bar", effects:{carbs:12, protein:-3, fat:3, vit:-3, fullness:5, pleasure:15}, nutrients:["carbs","protein","fat","vit"], cost:3},
+  {name:"Soft Drink", effects:{carbs:15, protein:-2, fat:0, vit:-2, fullness:2, pleasure:10}, nutrients:["carbs","protein","vit"], cost:3}
 ];
 
 let fullness = 50, pleasure = 50, carbs = 50, protein = 50, fat = 25, vit = 50, money = 230;
 let day = 1, mealsEaten = 0;
+let consecutiveFullnessMax = 0; // Track consecutive full meals for food poisoning
 const mealTitles = ["Breakfast","Lunch","Dinner"];
 
 function startGame() {
@@ -368,12 +334,25 @@ function eatMeal(food) {
 
   mealsEaten++;
   if(mealsEaten % 3 === 0) day++;
+
+  // Track consecutive full meals for food poisoning
+  if(fullness >= 100) consecutiveFullnessMax++;
+  else consecutiveFullnessMax = 0;
+
   clampValues();
+  checkGameOver(); // Handle all game over scenarios
   updateMeters();
   renderMeals();
 }
 
 function clampValues() {
+  // Carb overload logic
+  if(carbs > 100) {
+    carbs = 50;
+    fat = Math.min(100, fat + 10);
+    alert("Your body converted excess carbs to fat.");
+  }
+
   fullness = Math.min(100, Math.max(0, fullness));
   pleasure = Math.min(100, Math.max(0, pleasure));
   carbs = Math.min(100, Math.max(0, carbs));
@@ -383,6 +362,29 @@ function clampValues() {
   money = Math.max(0, money);
 }
 
+function checkGameOver() {
+  // Starvation
+  if(fullness === 0) return showGameOver("You starved from lack of food.");
+
+  // Overeating / Food Poisoning
+  if(consecutiveFullnessMax >= 5) return showGameOver("You got food poisoning from overeating.");
+  if(fullness === 100 && consecutiveFullnessMax < 5) return showGameOver("You overate and collapsed.");
+
+  // Depression
+  if(pleasure === 0) return showGameOver("Life lost its meaning… you lost motivation to continue.");
+
+  // Obesity
+  if(fat === 100) return showGameOver("Your health collapsed due to obesity.");
+
+  // Malnutrition
+  if(protein === 0) return showGameOver("Your body broke down from protein deficiency.");
+  if(vit === 0) return showGameOver("You got sick from vitamin deficiency.");
+
+  // Poverty / cannot afford meals
+  const affordable = foodCatalog.some(f => f.cost <= money);
+  if(!affordable) return showGameOver("You can't afford any meals!");
+}
+
 function showGameOver(msg) {
   document.getElementById('game-over-msg').textContent = msg;
   document.getElementById('game-over-modal').style.display = 'flex';
@@ -390,7 +392,7 @@ function showGameOver(msg) {
 
 function restartGame() {
   fullness = 50; pleasure = 50; carbs = 50; protein = 50; fat = 25; vit = 50; money = 200;
-  day = 1; mealsEaten = 0;
+  day = 1; mealsEaten = 0; consecutiveFullnessMax = 0;
   document.getElementById('game-over-modal').style.display = 'none';
   updateMeters();
   renderMeals();
