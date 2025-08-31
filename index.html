@@ -6,108 +6,143 @@
 <title>Fuel for Life</title>
 <style>
   body {
-  margin: 0;
-  font-family: 'Roboto', 'Segoe UI', sans-serif;
-  background: #1e1e2f;
-  height: 84vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-}
-.game-container {
-  width: 100%;
-  max-width: 360px;
-  height: 100%;
-  max-height: 640px;
-  background: #1e1e2f;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  box-sizing: border-box;
-  position: relative;
-}
-.top-bar { display: flex; justify-content: space-between; font-size: 16px; font-weight: 500; margin-bottom: 12px; }
-.metric { display: flex; align-items: center; gap: 5px; }
-.current-meal { text-align: center; font-size: 20px; font-weight: 600; margin-top: 10px; margin-bottom: 15px; color: #ffcc00; }
-.meter-container { margin-bottom: 12px; }
-.meter-label { font-size: 13px; margin-bottom: 3px; color: #ccc; display: flex; align-items: center; gap:5px; }
-.meter { width: 100%; height: 18px; background: #333; border-radius: 8px; overflow: hidden; position: relative; }
-.meter-fill { height: 100%; width: 50%; transition: width 0.3s, background-color 0.3s; border-radius: 8px; position: absolute; left:0; top:0; }
-.meters-grid { display: flex; justify-content: space-between; margin-bottom: 15px; }
-.small-meter { width: 48%; }
-.meal-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
-.meal-btn { padding: 12px; background: #2c2c3e; border: none; border-radius: 12px; font-size: 15px; cursor: pointer; display: flex; flex-direction: column; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.5); transition: 0.2s; color: #fff; }
-.meal-btn:hover { background: #3d3d55; transform: translateY(-2px); }
-.nutrients { font-size: 18px; display: flex; gap: 8px; justify-content: center; margin-top: 5px; color: #bbb; }
-.cost { font-weight: bold; color: #ffd700; margin-top: 5px; }
-.meal-title { font-weight: bold; margin-bottom: 5px; color: #ffcc00; font-size: 14px; }
-.modal { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; border-radius: 16px; flex-direction: column; color: #fff; font-size: 18px; text-align: center; padding: 20px; display: none; }
-.modal h2 { font-size: 24px; margin-bottom: 15px; color: #ff5555; }
-.modal button { margin-top: 20px; padding: 10px 20px; background: #ffcc00; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
-.splash-screen {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: #1e1e2f;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  z-index: 10;
-  color: #fff;
-  font-size: 18px;
-  text-align: center;
-  padding: 20px;
-}
-.splash-screen h1 { font-size: 32px; color: #ffcc00; margin-bottom: 10px; }
-.splash-screen button { padding: 12px 24px; font-size: 18px; border-radius: 12px; border: none; background: #ffcc00; color: #1e1e2f; font-weight: bold; cursor: pointer; transition: 0.2s; }
-.splash-screen button:hover { background: #ffd633; }
-.splash-screen a { color: #ffd633; text-decoration: underline; cursor: pointer; font-size: 16px; }
-.instructions-screen {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: #1e1e2f;
-  border-radius: 16px;
-  z-index: 11;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  font-size: 14px;
-}
-.instructions-screen h2 { font-size: 26px; color: #ffcc00; margin-bottom: 10px; text-align: center; }
-.instructions-screen h3 { font-size: 18px; color: #ffd633; margin-top: 15px; margin-bottom: 5px; }
-.instructions-screen p { margin-bottom: 12px; line-height: 1.6; color: #ccc; }
-.instructions-screen ul { margin-left: 15px; line-height: 1.6; margin-bottom: 12px; }
-.instructions-screen li { margin-bottom: 6px; }
-.instructions-screen .back-btn {
-  position: sticky;
-  bottom: 10px;
-  background: #ffcc00;
-  color: #1e1e2f;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-weight: bold;
-  cursor: pointer;
-  align-self: center;
-  margin-top: 15px;
-}
-.instructions-screen .back-btn:hover { background: #ffd633; }
-.instructions-screen::-webkit-scrollbar { width: 8px; }
-.instructions-screen::-webkit-scrollbar-track { background: #1e1e2f; border-radius: 4px; }
-.instructions-screen::-webkit-scrollbar-thumb { background: #ffd633; border-radius: 4px; }
-.instructions-screen::-webkit-scrollbar-thumb:hover { background: #ffcc00; }
+    margin: 0;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    background: #1e1e2f;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+  .game-container {
+    width: 100%;
+    max-width: 360px;
+    height: 100%;
+    max-height: 640px;
+    background: #1e1e2f;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    box-sizing: border-box;
+    position: relative;
+  }
+  .top-bar { display: flex; justify-content: space-between; font-size: 16px; font-weight: 500; margin-bottom: 12px; }
+  .metric { display: flex; align-items: center; gap: 5px; }
+  .current-meal { text-align: center; font-size: 20px; font-weight: 600; margin-top: 10px; margin-bottom: 15px; color: #ffcc00; }
+  .meter-container { margin-bottom: 12px; }
+  .meter-label { font-size: 13px; margin-bottom: 3px; color: #ccc; display: flex; align-items: center; gap:5px; }
+  .meter { width: 100%; height: 18px; background: #333; border-radius: 8px; overflow: hidden; position: relative; }
+  .meter-fill { height: 100%; width: 50%; transition: width 0.3s, background-color 0.3s; border-radius: 8px; position: absolute; left:0; top:0; }
+  .meters-grid { display: flex; justify-content: space-between; margin-bottom: 15px; }
+  .small-meter { width: 48%; }
+  .meal-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+  
+  /* Updated meal button styling */
+  .meal-btn {
+    padding: 12px;
+    background: #2c2c3e;
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    transition: 0.2s;
+    color: #fff;
+    text-align: center;
+  }
+  .meal-btn:hover { background: #3d3d55; transform: translateY(-2px); }
+  .meal-emoji {
+    font-size: 36px;
+    margin-bottom: 5px;
+  }
+  .meal-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #ffcc00;
+    font-size: 16px;
+  }
+  .nutrients {
+    font-size: 18px;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 5px;
+    color: #bbb;
+  }
+  .modal { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; border-radius: 16px; flex-direction: column; color: #fff; font-size: 18px; text-align: center; padding: 20px; display: none; }
+  .modal h2 { font-size: 24px; margin-bottom: 15px; color: #ff5555; }
+  .modal button { margin-top: 20px; padding: 10px 20px; background: #ffcc00; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
+  .splash-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #1e1e2f;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    padding: 20px;
+  }
+  .splash-screen h1 { font-size: 32px; color: #ffcc00; margin-bottom: 10px; }
+  .splash-screen button { padding: 12px 24px; font-size: 18px; border-radius: 12px; border: none; background: #ffcc00; color: #1e1e2f; font-weight: bold; cursor: pointer; transition: 0.2s; }
+  .splash-screen button:hover { background: #ffd633; }
+  .splash-screen a { color: #ffd633; text-decoration: underline; cursor: pointer; font-size: 16px; }
+  .instructions-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #1e1e2f;
+    border-radius: 16px;
+    z-index: 11;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    font-size: 14px;
+  }
+  .instructions-screen h2 { font-size: 26px; color: #ffcc00; margin-bottom: 10px; text-align: center; }
+  .instructions-screen h3 { font-size: 18px; color: #ffd633; margin-top: 15px; margin-bottom: 5px; }
+  .instructions-screen p { margin-bottom: 12px; line-height: 1.6; color: #ccc; }
+  .instructions-screen ul { margin-left: 15px; line-height: 1.6; margin-bottom: 12px; }
+  .instructions-screen li { margin-bottom: 6px; }
+  .instructions-screen .back-btn {
+    position: sticky;
+    bottom: 10px;
+    background: #ffcc00;
+    color: #1e1e2f;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: center;
+    margin-top: 15px;
+  }
+  .instructions-screen .back-btn:hover { background: #ffd633; }
+  .instructions-screen::-webkit-scrollbar { width: 8px; }
+  .instructions-screen::-webkit-scrollbar-track { background: #1e1e2f; border-radius: 4px; }
+  .instructions-screen::-webkit-scrollbar-thumb { background: #ffd633; border-radius: 4px; }
+  .instructions-screen::-webkit-scrollbar-thumb:hover { background: #ffcc00; }
 </style>
 </head>
 <body>
 
 <div class="game-container">
+  <audio id="meal-sound" src="meal.mp3"></audio>
+  <audio id="happy-sound" src="happychoice.mp3"></audio>
+  <audio id="sad-sound" src="sadchoice.mp3"></audio>
+
   <div class="splash-screen" id="splash-screen">
     <h1>Fuel for Life</h1>
     <p>Balance your nutrients, keep your body healthy, and survive as long as you can!</p>
@@ -152,7 +187,7 @@
   </div>
 
   <div class="top-bar">
-    <div class="metric" id="weight-display">🧍🏻‍♂️ 70kg</div>
+    <div class="metric" id="weight-display">⚖️ 70kg</div>
     <div class="metric" id="money-display">💰 $200</div>
   </div>
 
@@ -199,23 +234,27 @@
 
 <script>
 const foodCatalog = [
-  {name:"Oatmeal", effects:{carbs:10, protein:2, fat:1, vit:2, fullness:15, pleasure:-10}, nutrients:["carbs","protein","vit"], cost:10},
-  {name:"Burger", effects:{carbs:15, protein:5, fat:7, vit:2, fullness:20, pleasure:10}, nutrients:["carbs","protein","fat"], cost:15},
-  {name:"Salad", effects:{carbs:5, protein:-15, fat:-7, vit:4, fullness:17, pleasure:-15}, nutrients:["carbs","vit"], cost:8},
-  {name:"Pizza", effects:{carbs:20, protein:1, fat:9, vit:1, fullness:25, pleasure:12}, nutrients:["carbs","protein","fat"], cost:17},
-  {name:"Grilled Chicken", effects:{protein:8, fat:3, vit:2, fullness:18, pleasure:5}, nutrients:["protein","fat"], cost:12},
-  {name:"Fries", effects:{carbs:15, protein:-10, fat:5, vit:-2, fullness:15, pleasure:10}, nutrients:["carbs","fat"], cost:7},
-  {name:"Apple", effects:{carbs:8, protein:-6, fat:-5, vit:4, fullness:3, pleasure:-10}, nutrients:["carbs","vit"], cost:3},
-  {name:"Banana", effects:{carbs:10, protein:-7, fat:-4, vit:4, fullness:2, pleasure:-10}, nutrients:["carbs","vit"], cost:2},
-  {name:"Yogurt", effects:{carbs:5, protein:4, fat:1, fullness:4, pleasure:3}, nutrients:["carbs","protein"], cost:4},
-  {name:"Candy Bar", effects:{carbs:12, protein:-7, fat:3, vit:-3, fullness:5, pleasure:15}, nutrients:["carbs", "fat"], cost:3},
-  {name:"Soft Drink", effects:{carbs:15, protein:-7, fat:0, vit:-2, fullness:2, pleasure:10}, nutrients:["carbs"], cost:3}
+  {name:"Oatmeal", emoji:"🥣", effects:{carbs:10, protein:2, fat:1, vit:2, fullness:15, pleasure:-10}, nutrients:["carbs","protein","vit"], cost:10},
+  {name:"Burger", emoji:"🍔", effects:{carbs:15, protein:5, fat:7, vit:2, fullness:20, pleasure:10}, nutrients:["carbs","protein","fat"], cost:15},
+  {name:"Salad", emoji:"🥗", effects:{carbs:5, protein:-15, fat:-7, vit:4, fullness:17, pleasure:-15}, nutrients:["carbs","vit"], cost:8},
+  {name:"Pizza", emoji:"🍕", effects:{carbs:20, protein:1, fat:9, vit:1, fullness:25, pleasure:12}, nutrients:["carbs","protein","fat"], cost:17},
+  {name:"Grilled Chicken", emoji:"🍗", effects:{protein:8, fat:3, vit:2, fullness:18, pleasure:5}, nutrients:["protein","fat"], cost:12},
+  {name:"Fries", emoji:"🍟", effects:{carbs:15, protein:-10, fat:5, vit:-2, fullness:15, pleasure:10}, nutrients:["carbs","fat"], cost:7},
+  {name:"Apple", emoji:"🍎", effects:{carbs:8, protein:-6, fat:-5, vit:4, fullness:3, pleasure:-10}, nutrients:["carbs","vit"], cost:3},
+  {name:"Banana", emoji:"🍌", effects:{carbs:10, protein:-7, fat:-4, vit:4, fullness:2, pleasure:-10}, nutrients:["carbs","vit"], cost:2},
+  {name:"Yogurt", emoji:"🥛", effects:{carbs:5, protein:4, fat:1, fullness:4, pleasure:3}, nutrients:["carbs","protein"], cost:4},
+  {name:"Candy Bar", emoji:"🍫", effects:{carbs:12, protein:-7, fat:3, vit:-3, fullness:5, pleasure:15}, nutrients:["carbs", "fat"], cost:3},
+  {name:"Soft Drink", emoji:"🥤", effects:{carbs:15, protein:-7, fat:0, vit:-2, fullness:2, pleasure:10}, nutrients:["carbs"], cost:3}
 ];
 
 let fullness = 50, pleasure = 50, carbs = 50, protein = 50, fat = 25, vit = 50, money = 230;
 let day = 1, mealsEaten = 0;
-let consecutiveFullnessMax = 0; // Track consecutive full meals for food poisoning
+let consecutiveFullnessMax = 0;
 const mealTitles = ["Breakfast","Lunch","Dinner"];
+
+const mealSound = document.getElementById('meal-sound');
+const happySound = document.getElementById('happy-sound');
+const sadSound = document.getElementById('sad-sound');
 
 function startGame() {
   document.getElementById('splash-screen').style.display = 'none';
@@ -285,6 +324,7 @@ function getRandomMeals() {
 }
 
 function renderMeals() {
+  mealSound.play(); // play meal sound
   const mealsDiv = document.getElementById('meal-options');
   mealsDiv.innerHTML = '';
   const options = getRandomMeals();
@@ -296,14 +336,18 @@ function renderMeals() {
   options.forEach(food => {
     const btn = document.createElement('button');
     btn.className = 'meal-btn';
-    const icons = [];
-    if(food.nutrients.includes("carbs")) icons.push('🥖');
-    if(food.nutrients.includes("protein")) icons.push('🍗');
-    if(food.nutrients.includes("fat")) icons.push('🧈');
-    if(food.nutrients.includes("vit")) icons.push('🥦');
 
-    btn.innerHTML = `${food.name} <span class="cost">$${food.cost}</span>
-      <div class="nutrients">${icons.join(' ')}</div>`;
+    const mainEmoji = food.emoji;
+
+    const nutrientIcons = [];
+    if(food.nutrients.includes("carbs")) nutrientIcons.push('🥖');
+    if(food.nutrients.includes("protein")) nutrientIcons.push('🍗');
+    if(food.nutrients.includes("fat")) nutrientIcons.push('🧈');
+    if(food.nutrients.includes("vit")) nutrientIcons.push('🥦');
+
+    btn.innerHTML = `<div class="meal-emoji">${mainEmoji}</div>
+                     <div class="meal-title">${food.name} <span class="cost">$${food.cost}</span></div>
+                     <div class="nutrients">${nutrientIcons.join(' ')}</div>`;
 
     if(money >= food.cost) {
       affordable = true;
@@ -320,6 +364,8 @@ function renderMeals() {
 }
 
 function eatMeal(food) {
+  const old = {fullness, pleasure, carbs, protein, vit};
+
   food.nutrients.forEach(n => {
     switch(n) {
       case 'carbs': carbs += food.effects.carbs; break;
@@ -335,25 +381,35 @@ function eatMeal(food) {
   mealsEaten++;
   if(mealsEaten % 3 === 0) day++;
 
-  // Add weekly allowance after every 7th day dinner
-  if(mealsEaten % 21 === 0) { // 7 days * 3 meals = 21 meals
+  if(mealsEaten % 21 === 0) {
     money += 150;
     alert("You received your weekly allowance of $150!");
   }
 
-  // Track consecutive full meals for food poisoning
   if(fullness >= 100) consecutiveFullnessMax++;
   else consecutiveFullnessMax = 0;
 
   clampValues();
-  checkGameOver(); // Handle all game over scenarios
+  playChoiceSound(old);
+  checkGameOver();
   updateMeters();
   renderMeals();
 }
 
+function playChoiceSound(old) {
+  const majorityDown = (
+    (fullness < old.fullness ? 1 : 0) +
+    (pleasure < old.pleasure ? 1 : 0) +
+    (protein < old.protein ? 1 : 0) +
+    (vit < old.vit ? 1 : 0) +
+    (carbs > old.carbs ? 1 : 0)
+  ) >= 3;
+
+  if(majorityDown) sadSound.play();
+  else happySound.play();
+}
 
 function clampValues() {
-  // Carb overload logic
   if(carbs > 100) {
     carbs = 50;
     fat = Math.min(100, fat + 4);
@@ -370,24 +426,13 @@ function clampValues() {
 }
 
 function checkGameOver() {
-  // Starvation
   if(fullness === 0) return showGameOver("You starved from lack of food.");
-
-  // Overeating / Food Poisoning
   if(consecutiveFullnessMax >= 5) return showGameOver("You got food poisoning from overeating.");
   if(fullness === 100 && consecutiveFullnessMax < 5) return showGameOver("You overate and collapsed.");
-
-  // Depression
   if(pleasure === 0) return showGameOver("Life lost its meaning… you lost motivation to continue.");
-
-  // Obesity
   if(fat === 100) return showGameOver("Your health collapsed due to obesity.");
-
-  // Malnutrition
   if(protein === 0) return showGameOver("Your body broke down from protein deficiency.");
   if(vit === 0) return showGameOver("You got sick from vitamin deficiency.");
-
-  // Poverty / cannot afford meals
   const affordable = foodCatalog.some(f => f.cost <= money);
   if(!affordable) return showGameOver("You can't afford any meals!");
 }
