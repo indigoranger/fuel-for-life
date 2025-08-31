@@ -9,7 +9,7 @@
     margin: 0;
     font-family: 'Roboto', 'Segoe UI', sans-serif;
     background: #1e1e2f;
-    height: 80vh;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,7 +187,7 @@
   </div>
 
   <div class="top-bar">
-    <div class="metric" id="weight-display">⚖🧍🏻‍♂️ 70kg</div>
+    <div class="metric" id="weight-display">🧍🏻‍♂️ 70kg</div>
     <div class="metric" id="money-display">💰 $200</div>
   </div>
 
@@ -275,7 +275,7 @@ function backToSplash() {
 
 function updateWeight() {
   const weight = 40 + (fat / 100) * (110 - 40);
-  document.getElementById('weight-display').textContent = `⚖️ ${Math.round(weight)}kg`;
+  document.getElementById('weight-display').textContent = `🧍🏻‍♂️️ ${Math.round(weight)}kg`;
 }
 
 function updateMeters() {
