@@ -582,29 +582,29 @@ function clampValues() {
 
 function checkGameOver() {
   if(fullness === 0) 
-    return showGameOver("You ran out of energy and starved. <br>Try to keep your 🍽️ Fullness meter from dropping too low.");
+    return showGameOver("You ran out of energy and starved. <br>Try to keep your Fullness 🍽️ from dropping too low.");
 
   if(consecutiveFullnessMax >= 5) 
-    return showGameOver("Your body couldn’t handle all that overeating. <br>Watch your 🍽️ Fullness and pace your meals.");
+    return showGameOver("Your body couldn’t handle all that overeating. <br>Watch your Fullness 🍽️ and pace your meals.");
 
   if(fullness === 100 && consecutiveFullnessMax < 5) 
-    return showGameOver("That last meal was too much to handle. <br>Keep an eye on your 🍽️ Fullness so you don’t max out.");
+    return showGameOver("That last meal was too much to handle. <br>Keep an eye on your Fullness 🍽️  so you don’t max out.");
 
   if(pleasure === 0) 
-    return showGameOver("Life felt too dull without tasty food. <br>Mix in a few 😋 fun meals to stay motivated.");
+    return showGameOver("Life felt too dull without tasty food. <br>Mix in a few fun meals 😋 to stay motivated.");
 
   if(fat === 100) 
-    return showGameOver("Your health gave out from too much 🧈 Fat. <br>Balance indulgent foods with lighter choices.");
+    return showGameOver("Your health gave out from too much Fat 🧈. <br>Balance indulgent foods with lighter choices.");
 
   if(protein === 0) 
-    return showGameOver("Your body weakened without enough 🍗 Protein. <br>Add more protein-rich meals to stay strong.");
+    return showGameOver("Your body weakened without enough Protein 🍗. <br>Add more protein-rich meals to stay strong.");
 
   if(vit === 0) 
-    return showGameOver("You got sick from a lack of 🥦 Vitamins. <br>Don’t forget fruits and veggies to stay healthy.");
+    return showGameOver("You got sick from a lack of Vitamins 🥦. <br>Don’t forget fruits and veggies to stay healthy.");
 
   const affordable = foodCatalog.some(f => f.cost <= money);
   if(!affordable) 
-    return showGameOver("You ran out of 💰 and couldn’t buy food. <br>Budget your meals so the money lasts longer.");
+    return showGameOver("You ran out of cash 💰 and couldn’t buy food. <br>Budget your meals so the money lasts longer.");
 }
 
 
