@@ -225,7 +225,7 @@
   <p style="font-size:16px; line-height:1.5; color:#ccc;">
     <strong>🍽️ Fullness:</strong> Represents how satiated you are. Too low, and you risk starvation. Too high, and repeated overeating can lead to food poisoning.<br><br>
     <strong>😋 Pleasure:</strong> Measures your satisfaction from meals. A low pleasure level affects motivation and can end your journey.<br><br>
-    <strong>🥖 Carbs:</strong> Your energy source. Overconsumption converts to <em>fat 🧈</em>, while too little drains your energy.<br><br>
+    <strong>🍞 Carbs:</strong> Your energy source. Overconsumption converts to <em>fat 🧈</em>, while too little drains your energy.<br><br>
     <strong>🍗 Protein:</strong> Essential for muscle and overall health. Depletion can lead to body breakdown.<br><br>
     <strong>🧈 Fat:</strong> Necessary for energy storage, but excessive levels cause health collapse.<br><br>
     <strong>🥦 Vitamins:</strong> Required for general well-being. Deficiency can make you ill.<br><br>
@@ -239,15 +239,15 @@
   </p>
 
   <p style="font-size:16px; line-height:1.5; color:#ccc;">
-    <strong>🥣 Oatmeal<br></strong> Boosts carbs 🥖, protein 🍗, and vitamins 🥦. Moderate fullness, mild pleasure.<br><br>
-    <strong>🍔 Burger<br></strong> Increases carbs 🥖, protein 🍗, fat 🧈, and pleasure 😋, but lowers vitamins 🥦.<br><br>
+    <strong>🥣 Oatmeal<br></strong> Boosts carbs 🍞, protein 🍗, and vitamins 🥦. Moderate fullness, mild pleasure.<br><br>
+    <strong>🍔 Burger<br></strong> Increases carbs 🍞, protein 🍗, fat 🧈, and pleasure 😋, but lowers vitamins 🥦.<br><br>
     <strong>🥗 Salad<br></strong> High in vitamins 🥦 and fullness, reduces protein 🍗 and fat 🧈, lower pleasure.<br><br>
-    <strong>🍕 Pizza<br></strong> Rich in carbs 🥖 and fat 🧈, some protein 🍗, high pleasure 😋.<br><br>
+    <strong>🍕 Pizza<br></strong> Rich in carbs 🍞 and fat 🧈, some protein 🍗, high pleasure 😋.<br><br>
     <strong>🍗 Grilled Chicken<br></strong> Protein 🍗 boost, moderate fat 🧈, balanced fullness.<br><br>
-    <strong>🍟 Fries<br></strong> High carbs 🥖 and fat 🧈, fun 😋, low protein 🍗 and vitamins 🥦.<br><br>
+    <strong>🍟 Fries<br></strong> High carbs 🍞 and fat 🧈, fun 😋, low protein 🍗 and vitamins 🥦.<br><br>
     <strong>🍎/🍌 Fruits<br></strong> Vitamins 🥦, low fullness, lower pleasure.<br><br>
-    <strong>🥛 Yogurt<br></strong> Small boost to carbs 🥖 and protein 🍗, minor pleasure.<br><br>
-    <strong>🍫 Candy Bar / 🥤 Soft Drink<br></strong> Quick pleasure 😋, adds some carbs 🥖, may reduce vitamins 🥦 and protein 🍗.
+    <strong>🥛 Yogurt<br></strong> Small boost to carbs 🍞 and protein 🍗, minor pleasure.<br><br>
+    <strong>🍫 Candy Bar / 🥤 Soft Drink<br></strong> Quick pleasure 😋, adds some carbs 🍞, may reduce vitamins 🥦 and protein 🍗.
   </p>
 
   <h2 style="font-size:24px; color:#ffd633; margin-top:25px;">⚠️ Failure Conditions</h2>
@@ -263,7 +263,7 @@
   <h2 style="font-size:24px; color:#ffd633; margin-top:25px;">💡 Strategy Tips</h2>
 
   <p style="font-size:16px; line-height:1.5; color:#ccc;">
-    Balance meals to maintain all meters within safe ranges. <br>Monitor your 💰 resources carefully and plan around weekly allowances. <br>Rotate meals to avoid nutrient depletion, and remember: high pleasure foods 😋 can be tempting but may unbalance fullness 🧍‍♂️. <br>Always watch your meters, as neglecting any aspect can accelerate failure. <br>Plan your nutrition wisely, as excess carbs 🥖 automatically convert to fat 🧈.
+    Balance meals to maintain all meters within safe ranges. <br>Monitor your 💰 resources carefully and plan around weekly allowances. <br>Rotate meals to avoid nutrient depletion, and remember: high pleasure foods 😋 can be tempting but may unbalance fullness 🧍‍♂️. <br>Always watch your meters, as neglecting any aspect can accelerate failure. <br>Plan your nutrition wisely, as excess carbs 🍞 automatically convert to fat 🧈.
   </p>
 
   <p style="font-size:16px; line-height:1.5; color:#ccc; margin-top:20px;">
@@ -295,7 +295,7 @@
 
     <div class="meters-grid">
       <div class="small-meter">
-        <div class="meter-label">🥖 Carbs</div>
+        <div class="meter-label">🍞 Carbs</div>
         <div class="meter"><div class="meter-fill" id="carbs-fill"></div></div>
       </div>
       <div class="small-meter">
@@ -329,9 +329,9 @@
 
 <!-- Notification Modal -->
 <div class="modal" id="notification-modal">
-  <h2 id="notification-title">Alert!</h2>
+  <h2 id="notification-title">Alert</h2>
   <p id="notification-msg"></p>
-  <button id="notification-btn" onclick="closeNotification()">OK</button>
+  <button id="notification-btn" onclick="closeNotification()">Dismiss</button>
 </div>
 
 
@@ -385,19 +385,36 @@ function updateWeight() {
 
 function updateMeters() {
   function meterColor(value, type) {
-    if (type === 'fullness' || type === 'pleasure' || type === 'protein' || type === 'vit') {
-      if (value < 35) return '#f44336';
-      if (value < 70) return '#ff9800';
-      return '#4caf50';
-    } else if (type === 'fat') {
-      if (value >= 100) return '#f44336';
-      if (value > 40) return '#ff9800';
-      return '#4caf50';
-    } else if (type === 'carbs') {
-      return value <= 80 ? '#4caf50' : '#f44336';
-    }
-    return '#7c4dff';
+  if (type === 'fullness') {
+    if (value < 30) return '#f44336';      // Red if under 30
+    if (value < 60) return '#ff9800';      // Orange if 30-59
+    if (value <= 90) return '#4caf50';     // Green if 60-90
+    return '#f44336';                      // Red if above 90
+  } 
+  else if (type === 'pleasure') {
+    if (value < 30) return '#f44336';      // Red if under 30
+    if (value < 60) return '#ff9800';      // Orange if 30-59
+    return '#4caf50';                      // Green if 60+
+  } 
+  else if (type === 'carbs') {
+    if (value < 30) return '#f44336';      // Red if under 30
+    if (value < 60) return '#ff9800';      // Orange if 30-59
+    if (value <= 90) return '#4caf50';     // Green if 60-90
+    return '#f44336';                      // Red if above 90
+  } 
+  else if (type === 'fat') {
+    if (value < 20) return '#f44336';      // Red if under 20
+    if (value <= 50) return '#4caf50';     // Green if 20-50
+    if (value <= 70) return '#ff9800';     // Orange if 51-90
+    return '#f44336';                      // Red if above 90
+  } 
+  else if (type === 'protein' || type === 'vit') {
+    if (value < 30) return '#f44336';
+    if (value < 70) return '#ff9800';
+    return '#4caf50';
   }
+  return '#7c4dff'; // fallback color
+}
 
   document.getElementById('fullness-fill').style.width = fullness + '%';
   document.getElementById('fullness-fill').style.backgroundColor = meterColor(fullness, 'fullness');
@@ -445,7 +462,7 @@ function renderMeals() {
     const mainEmoji = food.emoji;
 
     const nutrientIcons = [];
-    if(food.nutrients.includes("carbs")) nutrientIcons.push('🥖');
+    if(food.nutrients.includes("carbs")) nutrientIcons.push('🍞');
     if(food.nutrients.includes("protein")) nutrientIcons.push('🍗');
     if(food.nutrients.includes("fat")) nutrientIcons.push('🧈');
     if(food.nutrients.includes("vit")) nutrientIcons.push('🥦');
