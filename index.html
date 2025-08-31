@@ -438,14 +438,11 @@ function renderMeals() {
 function eatMeal(food) {
   const old = {fullness, pleasure, carbs, protein, vit};
 
-  food.nutrients.forEach(n => {
-    switch(n) {
-      case 'carbs': carbs += food.effects.carbs; break;
-      case 'protein': protein += food.effects.protein; break;
-      case 'fat': fat += food.effects.fat; break;
-      case 'vit': vit += food.effects.vit; break;
-    }
-  });
+  if (food.effects.carbs) carbs += food.effects.carbs;
+if (food.effects.protein) protein += food.effects.protein;
+if (food.effects.fat) fat += food.effects.fat;
+if (food.effects.vit) vit += food.effects.vit;
+
   fullness += food.effects.fullness - 12;
   pleasure += food.effects.pleasure;
   money -= food.cost;
