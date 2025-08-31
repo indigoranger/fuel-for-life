@@ -471,7 +471,7 @@ function renderMeals() {
   mealsDiv.innerHTML = '';
   const options = getRandomMeals();
   const mealTitle = mealTitles[mealsEaten % 3];
-  document.getElementById('current-meal').textContent = `Day ${day} - ${mealTitle}`;
+  document.getElementById('current-meal').textContent = `⏰ Day ${day} - ${mealTitle}`;
 
   let affordable = false;
 
