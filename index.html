@@ -38,8 +38,7 @@
   .meters-grid { display: flex; justify-content: space-between; margin-bottom: 15px; }
   .small-meter { width: 48%; }
   .meal-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
-  
-  /* Updated meal button styling */
+
   .meal-btn {
     padding: 12px;
     background: #2c2c3e;
@@ -56,44 +55,40 @@
     text-align: center;
   }
   .meal-btn:hover { background: #3d3d55; transform: translateY(-2px); }
-  .meal-emoji {
-    font-size: 36px;
-    margin-bottom: 5px;
-  }
-  .meal-title {
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #ffcc00;
-    font-size: 16px;
-  }
-  .nutrients {
-    font-size: 18px;
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin-top: 5px;
-    color: #bbb;
-  }
+  .meal-emoji { font-size: 36px; margin-bottom: 5px; }
+  .meal-title { font-weight: bold; margin-bottom: 5px; color: #ffcc00; font-size: 16px; }
+  .nutrients { font-size: 18px; display: flex; gap: 8px; justify-content: center; margin-top: 5px; color: #bbb; }
+
   .modal {
-  position: fixed; /* instead of absolute */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  color: #fff;
-  font-size: 18px;
-  text-align: center;
-  padding: 20px;
-  display: none;
-  z-index: 100; /* make sure it's above everything */
-}
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+    padding: 20px;
+    display: none;
+    z-index: 100;
+  }
   .modal h2 { font-size: 24px; margin-bottom: 15px; color: #ff5555; }
-  .modal button { margin-top: 20px; padding: 10px 20px; background: #ffcc00; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
+
+  #game-over-btn {
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: none;
+    background: #ffcc00;
+    color: #1e1e2f;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  #game-over-btn:hover { background: #ffd633; }
+
   .splash-screen {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -111,9 +106,20 @@
     padding: 20px;
   }
   .splash-screen h1 { font-size: 32px; color: #ffcc00; margin-bottom: 10px; }
-  .splash-screen button { padding: 12px 24px; font-size: 18px; border-radius: 12px; border: none; background: #ffcc00; color: #1e1e2f; font-weight: bold; cursor: pointer; transition: 0.2s; }
+  .splash-screen button {
+    padding: 12px 24px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: none;
+    background: #ffcc00;
+    color: #1e1e2f;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+  }
   .splash-screen button:hover { background: #ffd633; }
   .splash-screen a { color: #ffd633; text-decoration: underline; cursor: pointer; font-size: 16px; }
+
   .instructions-screen {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -151,6 +157,9 @@
   .instructions-screen::-webkit-scrollbar-track { background: #1e1e2f; border-radius: 4px; }
   .instructions-screen::-webkit-scrollbar-thumb { background: #ffd633; border-radius: 4px; }
   .instructions-screen::-webkit-scrollbar-thumb:hover { background: #ffcc00; }
+
+  /* Hide main game UI initially */
+  #game-ui { display: none; }
 </style>
 </head>
 <body>
@@ -160,6 +169,7 @@
   <audio id="happy-sound" src="happychoice.mp3"></audio>
   <audio id="sad-sound" src="sadchoice.mp3"></audio>
 
+  <!-- Splash screen -->
   <div class="splash-screen" id="splash-screen">
     <h1>Fuel for Life</h1>
     <p>Balance your nutrients, keep your body healthy, and survive as long as you can!</p>
@@ -167,6 +177,7 @@
     <a onclick="showInstructions()">Instructions</a>
   </div>
 
+  <!-- Instructions screen -->
   <div class="instructions-screen" id="instructions-screen" style="display:none;">
     <h2>Instructions</h2>
     <p>Welcome! Your goal is to maintain a healthy balance of nutrients, manage your money, and enjoy your meals. Make strategic choices to survive as long as possible.</p>
@@ -195,49 +206,53 @@
     <button class="back-btn" onclick="backToSplash()">Back</button>
   </div>
 
-  <div class="top-bar">
-    <div class="metric" id="weight-display">🧍🏻‍♂️ 70kg</div>
-    <div class="metric" id="money-display">💰 $200</div>
-  </div>
-
-  <div class="meter-container">
-    <div class="meter-label">🍽️ Fullness</div>
-    <div class="meter"><div class="meter-fill" id="fullness-fill"></div></div>
-  </div>
-
-  <div class="meter-container">
-    <div class="meter-label">😋 Pleasure</div>
-    <div class="meter"><div class="meter-fill" id="pleasure-fill"></div></div>
-  </div>
-
-  <div class="meters-grid">
-    <div class="small-meter">
-      <div class="meter-label">🥖 Carbs</div>
-      <div class="meter"><div class="meter-fill" id="carbs-fill"></div></div>
+  <!-- Main game UI -->
+  <div id="game-ui">
+    <div class="top-bar">
+      <div class="metric" id="weight-display">🧍🏻‍♂️ 70kg</div>
+      <div class="metric" id="money-display">💰 $200</div>
     </div>
-    <div class="small-meter">
-      <div class="meter-label">🍗 Protein</div>
-      <div class="meter"><div class="meter-fill" id="protein-fill"></div></div>
+
+    <div class="meter-container">
+      <div class="meter-label">🍽️ Fullness</div>
+      <div class="meter"><div class="meter-fill" id="fullness-fill"></div></div>
     </div>
+
+    <div class="meter-container">
+      <div class="meter-label">😋 Pleasure</div>
+      <div class="meter"><div class="meter-fill" id="pleasure-fill"></div></div>
+    </div>
+
+    <div class="meters-grid">
+      <div class="small-meter">
+        <div class="meter-label">🥖 Carbs</div>
+        <div class="meter"><div class="meter-fill" id="carbs-fill"></div></div>
+      </div>
+      <div class="small-meter">
+        <div class="meter-label">🍗 Protein</div>
+        <div class="meter"><div class="meter-fill" id="protein-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="meters-grid">
+      <div class="small-meter">
+        <div class="meter-label">🧈 Fat</div>
+        <div class="meter"><div class="meter-fill" id="fat-fill"></div></div>
+      </div>
+      <div class="small-meter">
+        <div class="meter-label">🥦 Vitamins</div>
+        <div class="meter"><div class="meter-fill" id="vit-fill"></div></div>
+      </div>
+    </div>
+
+    <div class="current-meal" id="current-meal">Day 1 - Breakfast</div>
+    <div class="meal-options" id="meal-options"></div>
   </div>
 
-  <div class="meters-grid">
-    <div class="small-meter">
-      <div class="meter-label">🧈 Fat</div>
-      <div class="meter"><div class="meter-fill" id="fat-fill"></div></div>
-    </div>
-    <div class="small-meter">
-      <div class="meter-label">🥦 Vitamins</div>
-      <div class="meter"><div class="meter-fill" id="vit-fill"></div></div>
-    </div>
-  </div>
-
-  <div class="current-meal" id="current-meal">Day 1 - Breakfast</div>
-  <div class="meal-options" id="meal-options"></div>
-
+  <!-- Game Over Modal -->
   <div class="modal" id="game-over-modal">
     <h2 id="game-over-msg">Game Over!</h2>
-    <button onclick="restartGame()">Restart</button>
+    <button id="game-over-btn" onclick="backToMainMenu()">Back to Main Menu</button>
   </div>
 </div>
 
@@ -268,6 +283,7 @@ const sadSound = document.getElementById('sad-sound');
 function startGame() {
   document.getElementById('splash-screen').style.display = 'none';
   document.getElementById('instructions-screen').style.display = 'none';
+  document.getElementById('game-ui').style.display = 'block';
   updateMeters();
   renderMeals();
 }
@@ -333,7 +349,7 @@ function getRandomMeals() {
 }
 
 function renderMeals() {
-  mealSound.play(); // play meal sound
+  mealSound.play();
   const mealsDiv = document.getElementById('meal-options');
   mealsDiv.innerHTML = '';
   const options = getRandomMeals();
@@ -451,13 +467,15 @@ function showGameOver(msg) {
   document.getElementById('game-over-modal').style.display = 'flex';
 }
 
-function restartGame() {
-  fullness = 50; pleasure = 50; carbs = 50; protein = 50; fat = 25; vit = 50; money = 200;
-  day = 1; mealsEaten = 0; consecutiveFullnessMax = 0;
+function backToMainMenu() {
   document.getElementById('game-over-modal').style.display = 'none';
+  document.getElementById('splash-screen').style.display = 'flex';
+  document.getElementById('game-ui').style.display = 'none';
+  fullness = 50; pleasure = 50; carbs = 50; protein = 50; fat = 25; vit = 50; money = 230;
+  day = 1; mealsEaten = 0; consecutiveFullnessMax = 0;
   updateMeters();
-  renderMeals();
 }
 </script>
+
 </body>
 </html>
