@@ -164,6 +164,32 @@
   .instructions-screen::-webkit-scrollbar-track { background: #1e1e2f; border-radius: 4px; }
   .instructions-screen::-webkit-scrollbar-thumb { background: #ffd633; border-radius: 4px; }
   .instructions-screen::-webkit-scrollbar-thumb:hover { background: #ffcc00; }
+#notification-modal {
+  background: rgba(0,0,0,0.85);
+}
+
+#notification-title {
+  font-size: 22px;
+  color: #ffd633;
+  margin-bottom: 10px;
+}
+
+#notification-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background: #ffcc00;
+  color: #1e1e2f;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.2s;
+}
+#notification-btn:hover {
+  background: #ffd633;
+}
+
 
   /* Hide main game UI initially */
   #game-ui { display: none; }
@@ -301,18 +327,25 @@
   <button id="game-over-btn" onclick="backToMainMenu()">Back to Main Menu</button>
 </div>
 
+<!-- Notification Modal -->
+<div class="modal" id="notification-modal">
+  <h2 id="notification-title">Alert!</h2>
+  <p id="notification-msg"></p>
+  <button id="notification-btn" onclick="closeNotification()">OK</button>
+</div>
+
 
 <script>
 const foodCatalog = [
   {name:"Oatmeal", emoji:"🥣", effects:{carbs:10, protein:2, fat:1, vit:2, fullness:15, pleasure:-10}, nutrients:["carbs","protein","vit"], cost:10},
   {name:"Burger", emoji:"🍔", effects:{carbs:15, protein:5, fat:7, vit:-7, fullness:20, pleasure:10}, nutrients:["carbs","protein","fat"], cost:15},
-  {name:"Salad", emoji:"🥗", effects:{carbs:5, protein:-6, fat:-7, vit:4, fullness:17, pleasure:-15}, nutrients:["carbs","vit"], cost:8},
+  {name:"Salad", emoji:"🥗", effects:{carbs:5, protein:-7, fat:-7, vit:4, fullness:17, pleasure:-15}, nutrients:["carbs","vit"], cost:8},
   {name:"Pizza", emoji:"🍕", effects:{carbs:20, protein:1, fat:9, vit:-4, fullness:25, pleasure:12}, nutrients:["carbs","protein","fat"], cost:17},
   {name:"Grilled Chicken", emoji:"🍗", effects:{protein:8, fat:3, vit:-4, fullness:18, pleasure:5}, nutrients:["protein","fat"], cost:12},
   {name:"Fries", emoji:"🍟", effects:{carbs:15, protein:-10, fat:5, vit:-6, fullness:15, pleasure:10}, nutrients:["carbs","fat"], cost:7},
   {name:"Apple", emoji:"🍎", effects:{carbs:8, protein:-3, fat:-5, vit:4, fullness:3, pleasure:-10}, nutrients:["carbs","vit"], cost:3},
   {name:"Banana", emoji:"🍌", effects:{carbs:10, protein:-3, fat:-4, vit:4, fullness:2, pleasure:-10}, nutrients:["carbs","vit"], cost:2},
-  {name:"Yogurt", emoji:"🥛", effects:{carbs:5, protein:4, fat:1, vit:4, fullness:4, pleasure:3}, nutrients:["carbs","protein", "vit"], cost:4},
+  {name:"Yogurt", emoji:"🥛", effects:{carbs:5, protein:4, vit:4, fat:1, fullness:4, pleasure:3}, nutrients:["carbs","protein", "vit"], cost:4},
   {name:"Candy Bar", emoji:"🍫", effects:{carbs:12, protein:-7, fat:3, vit:-3, fullness:5, pleasure:15}, nutrients:["carbs", "fat"], cost:3},
   {name:"Soft Drink", emoji:"🥤", effects:{carbs:15, protein:-7, fat:0, vit:-2, fullness:2, pleasure:10}, nutrients:["carbs"], cost:3}
 ];
@@ -452,7 +485,7 @@ if (food.effects.vit) vit += food.effects.vit;
 
   if(mealsEaten % 21 === 0) {
     money += 150;
-    alert("You received your weekly allowance of $150!");
+    showNotification("You received your weekly allowance of $150!");
   }
 
   if(fullness >= 100) consecutiveFullnessMax++;
@@ -482,7 +515,8 @@ function clampValues() {
   if(carbs > 100) {
     carbs = 50;
     fat = Math.min(100, fat + 4);
-    alert("Your body converted excess carbs to fat.");
+    showNotification("🍞 Too many carbs! Your body converted them into 🧈 fat.");
+
   }
 
   fullness = Math.min(100, Math.max(0, fullness));
@@ -549,6 +583,17 @@ function backToMainMenu() {
   day = 1; mealsEaten = 0; consecutiveFullnessMax = 0;
   updateMeters();
 }
+
+function showNotification(msg) {
+  document.getElementById('notification-msg').innerHTML = msg;
+  document.getElementById('notification-modal').style.display = 'flex';
+}
+
+function closeNotification() {
+  document.getElementById('notification-modal').style.display = 'none';
+}
+
+
 </script>
 
 </body>
