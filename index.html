@@ -140,19 +140,24 @@
   .instructions-screen ul { margin-left: 15px; line-height: 1.6; margin-bottom: 12px; }
   .instructions-screen li { margin-bottom: 6px; }
   .instructions-screen .back-btn {
-    position: sticky;
-    bottom: 10px;
-    background: #ffcc00;
-    color: #1e1e2f;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-weight: bold;
-    cursor: pointer;
-    align-self: center;
-    margin-top: 15px;
-  }
-  .instructions-screen .back-btn:hover { background: #ffd633; }
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+  background: #ffcc00;  /* Same as main buttons */
+  color: #1e1e2f;       /* Same as main buttons */
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  align-self: center;
+  margin-top: 15px;
+}
+
+.instructions-screen .back-btn:hover {
+  background: #ffd633;   /* Hover color like other buttons */
+  transform: translateY(-2px);  /* Same hover lift effect as meals */
+}
+
   .instructions-screen::-webkit-scrollbar { width: 8px; }
   .instructions-screen::-webkit-scrollbar-track { background: #1e1e2f; border-radius: 4px; }
   .instructions-screen::-webkit-scrollbar-thumb { background: #ffd633; border-radius: 4px; }
@@ -178,33 +183,70 @@
   </div>
 
   <!-- Instructions screen -->
-  <div class="instructions-screen" id="instructions-screen" style="display:none;">
-    <h2>Instructions</h2>
-    <p>Welcome! Your goal is to maintain a healthy balance of nutrients, manage your money, and enjoy your meals. Make strategic choices to survive as long as possible.</p>
-    <h3>Basic Rules</h3>
-    <ul>
-      <li>Eat three meals per day: Breakfast, Lunch, Dinner.</li>
-      <li>Each meal has a cost. If you cannot afford any meal, the game ends.</li>
-      <li>Meals affect Carbs, Protein, Fat, Vitamins, Fullness, and Pleasure.</li>
-      <li>Fullness and Pleasure need to stay in healthy ranges to avoid penalties.</li>
-    </ul>
-    <h3>Gameplay Tips</h3>
-    <ul>
-      <li>Balance nutrients; do not focus only on one.</li>
-      <li>Track money to ensure you can buy food daily.</li>
-      <li>Use high-protein meals to counteract low protein levels.</li>
-      <li>Combine foods to maintain fullness without overspending.</li>
-      <li>Keep an eye on fat levels; weight changes with fat.</li>
-    </ul>
-    <h3>Hints & Strategy</h3>
-    <ul>
-      <li>Rotate meals to prevent nutrient depletion.</li>
-      <li>High pleasure foods improve satisfaction but may unbalance fullness.</li>
-      <li>Plan purchases to avoid running out of money mid-day.</li>
-      <li>Monitor all meters; falling too low in any can end the game faster.</li>
-    </ul>
-    <button class="back-btn" onclick="backToSplash()">Back</button>
-  </div>
+
+
+ 
+ <div class="instructions-screen" id="instructions-screen" style="display:none;">
+  <h1 style="font-size:32px; color:#ffcc00; margin-bottom:20px; text-align:center;">Fuel for Life</h1>
+  <p style="font-size:16px; line-height:1.6; color:#ccc;">
+    Welcome, survivor! Your mission is to thrive by carefully managing your <strong>nutrients</strong>, <strong>fullness</strong>, and <strong>pleasure</strong>, while keeping track of your 💰 <em>resources</em>. Every meal choice matters—plan strategically to survive as long as possible.
+  </p>
+
+  <h2 style="font-size:24px; color:#ffd633; margin-top:25px;">🍽️ Your Meters</h2>
+
+  <p style="font-size:16px; line-height:1.5; color:#ccc;">
+    <strong>🧍‍♂️ Fullness:</strong> Represents how satiated you are. Too low, and you risk starvation. Too high, and repeated overeating can lead to food poisoning.<br><br>
+    <strong>😋 Pleasure:</strong> Measures your satisfaction from meals. A low pleasure level affects motivation and can end your journey.<br><br>
+    <strong>🥖 Carbs:</strong> Your energy source. Overconsumption converts to <em>fat 🧈</em>, while too little drains your energy.<br><br>
+    <strong>🍗 Protein:</strong> Essential for muscle and overall health. Depletion can lead to body breakdown.<br><br>
+    <strong>🧈 Fat:</strong> Necessary for energy storage, but excessive levels cause health collapse.<br><br>
+    <strong>🥦 Vitamins:</strong> Required for general well-being. Deficiency can make you ill.<br><br>
+    <strong>💰 Money:</strong> Essential for buying meals. Running out prevents you from eating and ends the game.
+  </p>
+
+  <h2 style="font-size:24px; color:#ffd633; margin-top:25px;">🍽️ Meals</h2>
+
+  <p style="font-size:16px; line-height:1.5; color:#ccc;">
+    Meals affect your meters in different ways. Choose carefully to maintain balance and maximize survival:
+  </p>
+
+  <p style="font-size:16px; line-height:1.5; color:#ccc;">
+    <strong>🥣 Oatmeal:</strong> Boosts carbs 🥖, protein 🍗, and vitamins 🥦. Moderate fullness, mild pleasure.<br>
+    <strong>🍔 Burger:</strong> Increases carbs 🥖, protein 🍗, fat 🧈, and pleasure 😋, but lowers vitamins 🥦.<br>
+    <strong>🥗 Salad:</strong> High in vitamins 🥦, reduces protein 🍗 and fat 🧈, lower fullness and pleasure.<br>
+    <strong>🍕 Pizza:</strong> Rich in carbs 🥖 and fat 🧈, some protein 🍗, high pleasure 😋.<br>
+    <strong>🍗 Grilled Chicken:</strong> Protein 🍗 boost, moderate fat 🧈, balanced fullness.<br>
+    <strong>🍟 Fries:</strong> High carbs 🥖 and fat 🧈, fun 😋, low protein 🍗 and vitamins 🥦.<br>
+    <strong>🍎/🍌 Fruits:</strong> Vitamins 🥦, low fullness, lower pleasure.<br>
+    <strong>🥛 Yogurt:</strong> Small boost to carbs 🥖 and protein 🍗, minor pleasure.<br>
+    <strong>🍫 Candy Bar / 🥤 Soft Drink:</strong> Quick pleasure 😋, adds some carbs 🥖, may reduce vitamins 🥦 and protein 🍗.
+  </p>
+
+  <h2 style="font-size:24px; color:#ffd633; margin-top:25px;">⚠️ Failure Conditions</h2>
+
+  <p style="font-size:16px; line-height:1.5; color:#ccc;">
+    <strong>Fullness extremes:</strong> Starvation or repeated overeating can end your journey.<br>
+    <strong>Pleasure:</strong> Loss of enjoyment reduces motivation to continue.<br>
+    <strong>Protein & Vitamins:</strong> Deficiency leads to physical breakdown or illness.<br>
+    <strong>Fat:</strong> Excessive levels threaten overall health.<br>
+    <strong>Money:</strong> Without sufficient funds, you cannot purchase meals and the game ends.
+  </p>
+
+  <h2 style="font-size:24px; color:#ffd633; margin-top:25px;">💡 Strategy Tips</h2>
+
+  <p style="font-size:16px; line-height:1.5; color:#ccc;">
+    Balance meals to maintain all meters within safe ranges. Monitor your 💰 resources carefully and plan around weekly allowances. Rotate meals to avoid nutrient depletion, and remember: high pleasure foods 😋 can be tempting but may unbalance fullness 🧍‍♂️. Always watch your meters, as neglecting any aspect can accelerate failure. Plan your nutrition wisely, as excess carbs 🥖 automatically convert to fat 🧈.
+  </p>
+
+  <p style="font-size:16px; line-height:1.5; color:#ccc; margin-top:20px;">
+    Survive as long as possible, and see how many days you can thrive! Every choice matters.
+  </p>
+  
+  <button class="back-btn" onclick="backToSplash()">Back</button>
+</div>
+
+
+
 
   <!-- Main game UI -->
   <div id="game-ui">
