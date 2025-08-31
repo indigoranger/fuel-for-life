@@ -498,16 +498,32 @@ function clampValues() {
 }
 
 function checkGameOver() {
-  if(fullness === 0) return showGameOver("You starved from lack of food.");
-  if(consecutiveFullnessMax >= 5) return showGameOver("You got food poisoning from overeating.");
-  if(fullness === 100 && consecutiveFullnessMax < 5) return showGameOver("You overate and collapsed.");
-  if(pleasure === 0) return showGameOver("Life lost its meaning… you lost motivation to continue.");
-  if(fat === 100) return showGameOver("Your health collapsed due to obesity.");
-  if(protein === 0) return showGameOver("Your body broke down from protein deficiency.");
-  if(vit === 0) return showGameOver("You got sick from vitamin deficiency.");
+  if(fullness === 0) 
+    return showGameOver("You ran out of energy and starved. Try to keep your 🍽️ Fullness meter from dropping too low.");
+
+  if(consecutiveFullnessMax >= 5) 
+    return showGameOver("Your body couldn’t handle all that overeating. Watch your 🍽️ Fullness and pace your meals.");
+
+  if(fullness === 100 && consecutiveFullnessMax < 5) 
+    return showGameOver("That last meal was too much to handle. Keep an eye on your 🍽️ Fullness so you don’t max out.");
+
+  if(pleasure === 0) 
+    return showGameOver("Life felt too dull without tasty food. Mix in a few 😋 fun meals to stay motivated.");
+
+  if(fat === 100) 
+    return showGameOver("Your health gave out from too much 🧈 Fat. Balance indulgent foods with lighter choices.");
+
+  if(protein === 0) 
+    return showGameOver("Your body weakened without enough 🍗 Protein. Add more protein-rich meals to stay strong.");
+
+  if(vit === 0) 
+    return showGameOver("You got sick from a lack of 🥦 Vitamins. Don’t forget fruits and veggies to stay healthy.");
+
   const affordable = foodCatalog.some(f => f.cost <= money);
-  if(!affordable) return showGameOver("You can't afford any meals!");
+  if(!affordable) 
+    return showGameOver("You ran out of 💰 and couldn’t buy food. Budget your meals so the money lasts longer.");
 }
+
 
 function showGameOver(msg) {
   document.getElementById('game-over-msg').textContent = msg;
