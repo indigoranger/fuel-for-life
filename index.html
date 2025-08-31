@@ -366,26 +366,26 @@
 
 <script>
 const foodCatalog = [
-  {name:"Oatmeal", emoji:"🥣", effects:{carbs:10, protein:2, fat:1, vit:2, fullness:15, pleasure:-10}, nutrients:["carbs","protein","vit","fullness"], cost:10},
-  {name:"Burger", emoji:"🍔", effects:{carbs:15, protein:5, fat:7, vit:-7, fullness:20, pleasure:10}, nutrients:["carbs","protein","fat","fullness","pleasure"], cost:15},
+  {name:"Oatmeal", emoji:"🥣", effects:{carbs:8, protein:2, fat:1, vit:2, fullness:15, pleasure:-10}, nutrients:["carbs","protein","vit","fullness"], cost:10},
+  {name:"Burger", emoji:"🍔", effects:{carbs:10, protein:5, fat:7, vit:-7, fullness:20, pleasure:10}, nutrients:["carbs","protein","fat","fullness","pleasure"], cost:15},
   {name:"Salad", emoji:"🥗", effects:{carbs:1, protein:-4, fat:-13, vit:4, fullness:17, pleasure:-15}, nutrients:["vit","fullness"], cost:8},
-  {name:"Pizza", emoji:"🍕", effects:{carbs:20, protein:1, fat:9, vit:-4, fullness:25, pleasure:12}, nutrients:["carbs","protein","fat","fullness","pleasure"], cost:17},
-  {name:"Grilled Chicken", emoji:"🍗", effects:{protein:8, fat:3, vit:-4, fullness:18, pleasure:5}, nutrients:["protein","fat","fullness"], cost:12},
-  {name:"Fries", emoji:"🍟", effects:{carbs:15, protein:-10, fat:5, vit:-6, fullness:15, pleasure:10}, nutrients:["carbs","fat","fullness","pleasure"], cost:7},
+  {name:"Pizza", emoji:"🍕", effects:{carbs:15, protein:1, fat:9, vit:-4, fullness:25, pleasure:12}, nutrients:["carbs","protein","fat","fullness","pleasure"], cost:17},
+  {name:"Grilled Chicken", emoji:"🍗", effects:{carbs:-5, protein: 8, fat:3, vit:-4, fullness:18, pleasure: 5}, nutrients:["protein","fat","fullness"], cost:12},
+  {name:"Fries", emoji:"🍟", effects:{carbs:12, protein:-10, fat:5, vit:-6, fullness:15, pleasure:10}, nutrients:["carbs","fat","fullness","pleasure"], cost:7},
   {name:"Apple", emoji:"🍎", effects:{carbs:8, protein:-3, fat:-5, vit:4, fullness:3, pleasure:-10}, nutrients:["carbs","vit"], cost:3},
-  {name:"Banana", emoji:"🍌", effects:{carbs:10, protein:-3, fat:-4, vit:4, fullness:2, pleasure:-10}, nutrients:["carbs","vit"], cost:2},
+  {name:"Banana", emoji:"🍌", effects:{carbs:7, protein:-3, fat:-4, vit:4, fullness:2, pleasure:-10}, nutrients:["carbs","vit"], cost:2},
   {name:"Yogurt", emoji:"🥛", effects:{carbs:5, protein:4, vit:4, fat:1, fullness:4, pleasure:3}, nutrients:["carbs","protein","vit"], cost:4},
-  {name:"Candy Bar", emoji:"🍫", effects:{carbs:12, protein:-7, fat:3, vit:-3, fullness:5, pleasure:15}, nutrients:["carbs","fat","pleasure"], cost:3},
-  {name:"Soft Drink", emoji:"🥤", effects:{carbs:15, protein:-7, fat:0, vit:-2, fullness:2, pleasure:10}, nutrients:["carbs","pleasure"], cost:3},
-  {name:"Steak", emoji:"🥩", effects:{carbs:0, protein:15, fat:10, vit:-5, fullness:20, pleasure:10}, nutrients:["protein","fat","fullness","pleasure"], cost:20},
-  {name:"Smoothie", emoji:"🍹", effects:{carbs:12, protein:2, fat:1, vit:8, fullness:8, pleasure:12}, nutrients:["carbs","vit","pleasure"], cost:7},
+  {name:"Candy Bar", emoji:"🍫", effects:{carbs:8, protein:-7, fat:3, vit:-3, fullness:5, pleasure:15}, nutrients:["carbs","fat","pleasure"], cost:3},
+  {name:"Soft Drink", emoji:"🥤", effects:{carbs:10, protein:-7, fat:0, vit:-2, fullness:2, pleasure:10}, nutrients:["carbs","pleasure"], cost:3},
+  {name:"Steak", emoji:"🥩", effects:{carbs:-5, protein:15, fat:10, vit:-5, fullness:20, pleasure:10}, nutrients:["protein","fat","fullness","pleasure"], cost:20},
+  {name:"Smoothie", emoji:"🍹", effects:{carbs:-5, protein: 2, fat:1, vit:8, fullness: 8, pleasure:12}, nutrients:["carbs","vit","pleasure"], cost:7},
   {name:"Sushi", emoji:"🍣", effects:{carbs:10, protein:8, fat:3, vit:3, fullness:15, pleasure:8}, nutrients:["carbs","protein","vit","fullness","pleasure"], cost:18},
   {name:"Chocolate Cake", emoji:"🍰", effects:{carbs:20, protein:3, fat:12, vit:-3, fullness:18, pleasure:20}, nutrients:["carbs","protein","fat","fullness","pleasure"], cost:15},
   {name:"Avocado Toast", emoji:"🥑", effects:{carbs:8, protein:3, fat:8, vit:5, fullness:12, pleasure:7}, nutrients:["carbs","fat","vit","fullness"], cost:10},
   {name:"Eggs & Bacon", emoji:"🥓🥚", effects:{carbs:0, protein:10, fat:12, vit:2, fullness:18, pleasure:10}, nutrients:["protein","fat","fullness","pleasure"], cost:14},
-  {name:"Granola Bar", emoji:"🥖", effects:{carbs:10, protein:2, fat:2, vit:2, fullness:6, pleasure:5}, nutrients:["carbs","protein","fat"], cost:5},
+  {name:"Granola Bar", emoji:"🥖", effects:{carbs:8, protein:2, fat:2, vit:2, fullness:6, pleasure:5}, nutrients:["carbs","protein","fat"], cost:5},
   {name:"Tomato Soup", emoji:"🍅", effects:{carbs:6, protein:2, fat:1, vit:5, fullness:10, pleasure:2}, nutrients:["carbs","vit","fullness"], cost:6},
-  {name:"Ice Cream", emoji:"🍦", effects:{carbs:15, protein:1, fat:8, vit:-2, fullness:12, pleasure:15}, nutrients:["carbs","fat","fullness","pleasure"], cost:8},
+  {name:"Ice Cream", emoji:"🍦", effects:{carbs:12, protein:1, fat:8, vit:-2, fullness:12, pleasure:15}, nutrients:["carbs","fat","fullness","pleasure"], cost:8},
   {name:"Nuts Mix", emoji:"🥜", effects:{carbs:5, protein:5, fat:10, vit:2, fullness:8, pleasure:7}, nutrients:["protein","fat","vit","fullness"], cost:9}
 ];
 
