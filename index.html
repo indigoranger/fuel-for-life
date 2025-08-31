@@ -77,16 +77,18 @@
   .modal h2 { font-size: 24px; margin-bottom: 15px; color: #ff5555; }
 
   #game-over-btn {
-    padding: 12px 24px;
-    font-size: 18px;
-    border-radius: 12px;
-    border: none;
-    background: #ffcc00;
-    color: #1e1e2f;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-  }
+  padding: 12px 24px;
+  font-size: 18px;
+  border-radius: 12px;
+  border: none;
+  background: #ffcc00;
+  color: #1e1e2f;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 52px; 
+}
+
   #game-over-btn:hover { background: #ffd633; }
 
   .splash-screen {
@@ -213,7 +215,7 @@
   <p style="font-size:16px; line-height:1.5; color:#ccc;">
     <strong>🥣 Oatmeal<br></strong> Boosts carbs 🥖, protein 🍗, and vitamins 🥦. Moderate fullness, mild pleasure.<br><br>
     <strong>🍔 Burger<br></strong> Increases carbs 🥖, protein 🍗, fat 🧈, and pleasure 😋, but lowers vitamins 🥦.<br><br>
-    <strong>🥗 Salad<br></strong> High in vitamins 🥦, reduces protein 🍗 and fat 🧈, lower fullness and pleasure.<br><br>
+    <strong>🥗 Salad<br></strong> High in vitamins 🥦 and fullness, reduces protein 🍗 and fat 🧈, lower pleasure.<br><br>
     <strong>🍕 Pizza<br></strong> Rich in carbs 🥖 and fat 🧈, some protein 🍗, high pleasure 😋.<br><br>
     <strong>🍗 Grilled Chicken<br></strong> Protein 🍗 boost, moderate fat 🧈, balanced fullness.<br><br>
     <strong>🍟 Fries<br></strong> High carbs 🥖 and fat 🧈, fun 😋, low protein 🍗 and vitamins 🥦.<br><br>
@@ -291,12 +293,14 @@
     <div class="meal-options" id="meal-options"></div>
   </div>
 
-  <!-- Game Over Modal -->
-  <div class="modal" id="game-over-modal">
-    <h2 id="game-over-msg">Game Over!</h2>
-    <button id="game-over-btn" onclick="backToMainMenu()">Back to Main Menu</button>
-  </div>
+<!-- Game Over Modal -->
+<div class="modal" id="game-over-modal">
+  <h2 id="game-over-msg">Game Over!</h2>
+  <p id="days-survived"></p>
+  <p id="high-score"></p>
+  <button id="game-over-btn" onclick="backToMainMenu()">Back to Main Menu</button>
 </div>
+
 
 <script>
 const foodCatalog = [
@@ -316,6 +320,7 @@ const foodCatalog = [
 let fullness = 50, pleasure = 50, carbs = 50, protein = 50, fat = 25, vit = 50, money = 230;
 let day = 1, mealsEaten = 0;
 let consecutiveFullnessMax = 0;
+let highScore = 0; // 
 const mealTitles = ["Breakfast","Lunch","Dinner"];
 
 const mealSound = document.getElementById('meal-sound');
@@ -506,8 +511,22 @@ function checkGameOver() {
 
 function showGameOver(msg) {
   document.getElementById('game-over-msg').textContent = msg;
+  
+  // Bold full "X days"
+  document.getElementById('days-survived').innerHTML = 
+    `You survived <strong>${day} day${day > 1 ? 's' : ''}</strong>!`;
+  
+  // Update high score
+  if(day > highScore) {
+    highScore = day;
+  }
+  document.getElementById('high-score').innerHTML = 
+    `🏆 High Score: <strong>${highScore} day${highScore > 1 ? 's' : ''}</strong>`;
+
   document.getElementById('game-over-modal').style.display = 'flex';
 }
+
+
 
 function backToMainMenu() {
   document.getElementById('game-over-modal').style.display = 'none';
