@@ -30,7 +30,7 @@
   }
   .top-bar { display: flex; justify-content: space-between; font-size: 16px; font-weight: 500; margin-bottom: 12px; }
   .metric { display: flex; align-items: center; gap: 5px; }
-  .current-meal { text-align: center; font-size: 20px; font-weight: 600; margin-top: 10px; margin-bottom: 15px; color: #ffcc00; }
+  .current-meal { text-align: center; font-size: 20px; font-weight: 600; margin-top: 10px; margin-bottom: 15px; color: #fff; }
   .meter-container { margin-bottom: 12px; }
   .meter-label { font-size: 13px; margin-bottom: 3px; color: #ccc; display: flex; align-items: center; gap:5px; }
   .meter { width: 100%; height: 18px; background: #333; border-radius: 8px; overflow: hidden; position: relative; }
@@ -368,7 +368,7 @@
 const foodCatalog = [
   {name:"Oatmeal", emoji:"🥣", effects:{carbs:10, protein:2, fat:1, vit:2, fullness:15, pleasure:-10}, nutrients:["carbs","protein","vit","fullness"], cost:10},
   {name:"Burger", emoji:"🍔", effects:{carbs:15, protein:5, fat:7, vit:-7, fullness:20, pleasure:10}, nutrients:["carbs","protein","fat","fullness","pleasure"], cost:15},
-  {name:"Salad", emoji:"🥗", effects:{carbs:5, protein:-7, fat:-7, vit:4, fullness:17, pleasure:-15}, nutrients:["carbs","vit","fullness"], cost:8},
+  {name:"Salad", emoji:"🥗", effects:{carbs:1, protein:-4, fat:-13, vit:4, fullness:17, pleasure:-15}, nutrients:["vit","fullness"], cost:8},
   {name:"Pizza", emoji:"🍕", effects:{carbs:20, protein:1, fat:9, vit:-4, fullness:25, pleasure:12}, nutrients:["carbs","protein","fat","fullness","pleasure"], cost:17},
   {name:"Grilled Chicken", emoji:"🍗", effects:{protein:8, fat:3, vit:-4, fullness:18, pleasure:5}, nutrients:["protein","fat","fullness"], cost:12},
   {name:"Fries", emoji:"🍟", effects:{carbs:15, protein:-10, fat:5, vit:-6, fullness:15, pleasure:10}, nutrients:["carbs","fat","fullness","pleasure"], cost:7},
@@ -411,10 +411,10 @@ const surpriseEvents = [
       protein = Math.max(0, protein - 10);
       showNotification(`
         🤢 Oh no! That last meal didn’t sit well. You feel less satisfied with food for a while.<br><br>
-        <span style="color:red;">Fullness low</span><br>
-        <span style="color:red;">Pleasure low</span><br>
-        <span style="color:red;">Carbs low</span><br>
-        <span style="color:red;">Vitamins low</span><br>
+        <span style="color:#f44336;">Fullness low</span><br>
+        <span style="color:#f44336;">Pleasure low</span><br>
+        <span style="color:#f44336;">Carbs low</span><br>
+        <span style="color:#f44336;">Vitamins low</span><br>
       `);
     }
   },
@@ -429,10 +429,10 @@ const surpriseEvents = [
       protein = Math.max(0, protein - 10);
       showNotification(`
         🤧 You caught the flu! You feel weak and less energized.<br><br>
-        <span style="color:red;">Vitamins low</span><br>
-        <span style="color:red;">Fullness low</span><br>
-        <span style="color:red;">Pleasure low</span><br>
-        <span style="color:red;">Carbs low</span><br>
+        <span style="color:#f44336;">Vitamins low</span><br>
+        <span style="color:#f44336;">Fullness low</span><br>
+        <span style="color:#f44336;">Pleasure low</span><br>
+        <span style="color:#f44336;">Carbs low</span><br>
        
       `);
     }
@@ -443,7 +443,7 @@ const surpriseEvents = [
       protein = 20;
       showNotification(`
         💪 Ouch! Your body feels weaker than usual, protein won’t be as effective today.<br><br>
-        <span style="color:red;">Protein low</span>
+        <span style="color:#f44336;">Protein low</span>
       `);
     }
   }
@@ -552,9 +552,15 @@ function getRandomMeals() {
 function renderMeals() {
   const mealsDiv = document.getElementById('meal-options');
   mealsDiv.innerHTML = '';
+
   const options = getRandomMeals();
-  const mealTitle = mealTitles[mealsEaten % 3];
-  document.getElementById('current-meal').textContent = `⏰ Day ${day} - ${mealTitle}`;
+  const mealIndex = mealsEaten % 3;
+const mealTitle = mealTitles[mealIndex];
+const mealEmojis = ["⛅", "☀️", "🌘"];
+const mealEmoji = mealEmojis[mealIndex];
+
+document.getElementById('current-meal').textContent = `${mealEmoji} Day ${day} - ${mealTitle}`;
+
 
   let affordable = false;
 
@@ -564,25 +570,24 @@ function renderMeals() {
 
     const mainEmoji = food.emoji;
 
-const leftIcons = [];  // Main nutrients
-const rightIcons = []; // Fullness and Pleasure
+    const leftIcons = [];  // Main nutrients
+    const rightIcons = []; // Fullness and Pleasure
 
-if(food.nutrients.includes("carbs")) leftIcons.push('🍞');
-if(food.nutrients.includes("protein")) leftIcons.push('🍗');
-if(food.nutrients.includes("fat")) leftIcons.push('🧈');
-if(food.nutrients.includes("vit")) leftIcons.push('🥦');
-if(food.nutrients.includes("fullness")) rightIcons.push('🍽️');
-if(food.nutrients.includes("pleasure")) rightIcons.push('😋');
+    if(food.nutrients.includes("carbs")) leftIcons.push('🍞');
+    if(food.nutrients.includes("protein")) leftIcons.push('🍗');
+    if(food.nutrients.includes("fat")) leftIcons.push('🧈');
+    if(food.nutrients.includes("vit")) leftIcons.push('🥦');
+    if(food.nutrients.includes("fullness")) rightIcons.push('🍽️');
+    if(food.nutrients.includes("pleasure")) rightIcons.push('😋');
 
-btn.innerHTML = `
-  <div class="meal-emoji">${mainEmoji}</div>
-  <div class="meal-title">${food.name} <span class="cost">$${food.cost}</span></div>
-  <div class="nutrients">
-    <span class="left">${leftIcons.join(' ')}</span>
-    <span class="extra">${rightIcons.join(' ')}</span>
-  </div>
-`;
-
+    btn.innerHTML = `
+      <div class="meal-emoji">${mainEmoji}</div>
+      <div class="meal-title">${food.name} <span class="cost">$${food.cost}</span></div>
+      <div class="nutrients">
+        <span class="left">${leftIcons.join(' ')}</span>
+        <span class="extra">${rightIcons.join(' ')}</span>
+      </div>
+    `;
 
     if(money >= food.cost) {
       affordable = true;
@@ -602,23 +607,22 @@ function eatMeal(food) {
   const old = {fullness, pleasure, carbs, protein, vit};
 
   if (food.effects.carbs) carbs += food.effects.carbs;
-if (food.effects.protein) protein += food.effects.protein;
-if (food.effects.fat) fat += food.effects.fat;
-if (food.effects.vit) vit += food.effects.vit;
+  if (food.effects.protein) protein += food.effects.protein;
+  if (food.effects.fat) fat += food.effects.fat;
+  if (food.effects.vit) vit += food.effects.vit;
 
   fullness += food.effects.fullness - 12;
   pleasure += food.effects.pleasure;
   money -= food.cost;
 
-  mealsEaten++;
-  if(mealsEaten % 3 === 0) day++;
-mealsEaten++;
-if(mealsEaten % 3 === 0) {
-  day++;
-  triggerDailyEvent(); // check for surprise event at start of new day
-}
-turnsSinceLastEvent++;
+  mealsEaten++; // increment only once
 
+  if(mealsEaten % 3 === 0) {
+    day++;
+    triggerDailyEvent(); // check for surprise event at start of new day
+  }
+
+  turnsSinceLastEvent++;
 
   if(mealsEaten % 21 === 0) {
     money += 150;
@@ -634,6 +638,7 @@ turnsSinceLastEvent++;
   updateMeters();
   renderMeals();
 }
+
 
 function playChoiceSound() {
   function isRed(value, type) {
