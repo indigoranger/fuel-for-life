@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +58,25 @@
   .meal-btn:hover { background: #3d3d55; transform: translateY(-2px); }
   .meal-emoji { font-size: 36px; margin-bottom: 5px; }
   .meal-title { font-weight: bold; margin-bottom: 5px; color: #ffcc00; font-size: 16px; }
-  .nutrients { font-size: 18px; display: flex; gap: 8px; justify-content: center; margin-top: 5px; color: #bbb; }
+.nutrients {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin-top: 5px;
+  color: #bbb;
+  width: 100%; /* take full width of the meal button */
+}
+.nutrients .left {
+  text-align: left;
+  margin-left: 16px; /* increase space from left edge */
+}
+.nutrients .extra {
+  text-align: right;
+  margin-right: 16px; /* increase space from left edge */
+}
+
+
+
 
   .modal {
     position: fixed;
@@ -481,18 +500,25 @@ function renderMeals() {
 
     const mainEmoji = food.emoji;
 
- const nutrientIcons = [];
-if(food.nutrients.includes("carbs")) nutrientIcons.push('🍞');
-if(food.nutrients.includes("protein")) nutrientIcons.push('🍗');
-if(food.nutrients.includes("fat")) nutrientIcons.push('🧈');
-if(food.nutrients.includes("vit")) nutrientIcons.push('🥦');
-if(food.nutrients.includes("fullness")) nutrientIcons.push('🍽️');
-if(food.nutrients.includes("pleasure")) nutrientIcons.push('😋');
+const leftIcons = [];  // Main nutrients
+const rightIcons = []; // Fullness and Pleasure
 
+if(food.nutrients.includes("carbs")) leftIcons.push('🍞');
+if(food.nutrients.includes("protein")) leftIcons.push('🍗');
+if(food.nutrients.includes("fat")) leftIcons.push('🧈');
+if(food.nutrients.includes("vit")) leftIcons.push('🥦');
+if(food.nutrients.includes("fullness")) rightIcons.push('🍽️');
+if(food.nutrients.includes("pleasure")) rightIcons.push('😋');
 
-    btn.innerHTML = `<div class="meal-emoji">${mainEmoji}</div>
-                     <div class="meal-title">${food.name} <span class="cost">$${food.cost}</span></div>
-                     <div class="nutrients">${nutrientIcons.join(' ')}</div>`;
+btn.innerHTML = `
+  <div class="meal-emoji">${mainEmoji}</div>
+  <div class="meal-title">${food.name} <span class="cost">$${food.cost}</span></div>
+  <div class="nutrients">
+    <span class="left">${leftIcons.join(' ')}</span>
+    <span class="extra">${rightIcons.join(' ')}</span>
+  </div>
+`;
+
 
     if(money >= food.cost) {
       affordable = true;
