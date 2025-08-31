@@ -182,6 +182,37 @@
   .instructions-screen::-webkit-scrollbar-track { background: #1e1e2f; border-radius: 4px; }
   .instructions-screen::-webkit-scrollbar-thumb { background: #ffd633; border-radius: 4px; }
   .instructions-screen::-webkit-scrollbar-thumb:hover { background: #ffcc00; }
+
+
+/* Current meal animations */
+.scroll-in {
+  animation: slideInRight 0.4s forwards;
+}
+
+.scroll-out {
+  animation: slideOutLeft 0.4s forwards;
+}
+
+
+.current-meal-wrapper {
+  width: 100%;
+  overflow: hidden;  /* prevents scrollbars */
+  text-align: center;
+}
+
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutLeft {
+  from { transform: translateX(0); opacity: 1; }
+  to   { transform: translateX(-100%); opacity: 0; }
+}
+
+
+
 #notification-modal {
   background: rgba(0,0,0,0.85);
 }
@@ -344,7 +375,10 @@
       </div>
     </div>
 
-    <div class="current-meal" id="current-meal">Day 1 - Breakfast</div>
+    <div class="current-meal-wrapper">
+  <div class="current-meal" id="current-meal">Day 1 - Breakfast</div>
+</div>
+
     <div class="meal-options" id="meal-options"></div>
   </div>
 
@@ -393,6 +427,8 @@ let fullness = 50, pleasure = 50, carbs = 50, protein = 50, fat = 25, vit = 50, 
 let day = 1, mealsEaten = 0;
 let consecutiveFullnessMax = 0;
 let highScore = 0; // 
+let hasStartedMeals = false; // controls animation after first meal
+
 const mealTitles = ["Breakfast","Lunch","Dinner"];
 
 const mealSound = document.getElementById('meal-sound');
@@ -558,8 +594,31 @@ function renderMeals() {
 const mealTitle = mealTitles[mealIndex];
 const mealEmojis = ["⛅", "☀️", "🌘"];
 const mealEmoji = mealEmojis[mealIndex];
+const currentMealEl = document.getElementById('current-meal');
+const newText = `${mealEmoji} Day ${day} - ${mealTitle}`;
 
-document.getElementById('current-meal').textContent = `${mealEmoji} Day ${day} - ${mealTitle}`;
+// Only animate after the first meal
+if (hasStartedMeals && currentMealEl.textContent !== newText) {
+  currentMealEl.classList.add("scroll-out");
+
+  currentMealEl.addEventListener("animationend", function handler() {
+    currentMealEl.textContent = newText;
+    currentMealEl.classList.remove("scroll-out");
+    currentMealEl.classList.add("scroll-in");
+
+    currentMealEl.addEventListener("animationend", function cleanup() {
+      currentMealEl.classList.remove("scroll-in");
+      currentMealEl.removeEventListener("animationend", cleanup);
+    });
+
+    currentMealEl.removeEventListener("animationend", handler);
+  });
+} else {
+  // On first render, just set text with no animation
+  currentMealEl.textContent = newText;
+}
+
+
 
 
   let affordable = false;
@@ -636,6 +695,10 @@ function eatMeal(food) {
   playChoiceSound();
   checkGameOver();
   updateMeters();
+
+hasStartedMeals = true;
+
+
   renderMeals();
 }
 
