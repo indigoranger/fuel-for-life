@@ -581,50 +581,65 @@ function clampValues() {
 }
 
 function checkGameOver() {
-  if(fullness === 0) 
-    return showGameOver("You ran out of energy and starved. <br>Try to keep your Fullness 🍽️ from dropping too low.");
+if(fullness === 0) return showGameOver('fullness_zero');
+if(consecutiveFullnessMax >= 5) return showGameOver('fullness_overeat');
+if(fullness === 100 && consecutiveFullnessMax < 5) return showGameOver('fullness_max');
+if(pleasure === 0) return showGameOver('pleasure_zero');
+if(fat === 100) return showGameOver('fat_max');
+if(protein === 0) return showGameOver('protein_zero');
+if(vit === 0) return showGameOver('vit_zero');
+const affordable = foodCatalog.some(f => f.cost <= money);
+if(!affordable) return showGameOver('money_zero');
 
-  if(consecutiveFullnessMax >= 5) 
-    return showGameOver("Your body couldn’t handle all that overeating. <br>Watch your Fullness 🍽️ and pace your meals.");
-
-  if(fullness === 100 && consecutiveFullnessMax < 5) 
-    return showGameOver("That last meal was too much to handle. <br>Keep an eye on your Fullness 🍽️  so you don’t max out.");
-
-  if(pleasure === 0) 
-    return showGameOver("Life felt too dull without tasty food. <br>Mix in a few fun meals 😋 to stay motivated.");
-
-  if(fat === 100) 
-    return showGameOver("Your health gave out from too much Fat 🧈. <br>Balance indulgent foods with lighter choices.");
-
-  if(protein === 0) 
-    return showGameOver("Your body weakened without enough Protein 🍗. <br>Add more protein-rich meals to stay strong.");
-
-  if(vit === 0) 
-    return showGameOver("You got sick from a lack of Vitamins 🥦. <br>Don’t forget fruits and veggies to stay healthy.");
-
-  const affordable = foodCatalog.some(f => f.cost <= money);
-  if(!affordable) 
-    return showGameOver("You ran out of cash 💰 and couldn’t buy food. <br>Budget your meals so the money lasts longer.");
 }
 
 
-function showGameOver(msg) {
+function showGameOver(msgType) {
   const gameOverSound = document.getElementById('gameover-sound');
   gameOverSound.play(); 
 
-  // Use innerHTML to allow <br> to work
+  let msg = '';
+
+  switch(msgType) {
+    case 'fullness_zero':
+      msg = `You ran out of energy and starved <br><span style="font-size:18px; color:#ccc;">Try to keep your Fullness 🍽️ from dropping too low</span>`;
+      break;
+    case 'fullness_overeat':
+      msg = `Your body couldn’t handle all that overeating <br><span style="font-size:18px; color:#ccc;">Watch your Fullness 🍽️ and pace your meals</span>`;
+      break;
+    case 'fullness_max':
+      msg = `That last meal was too much to handle <br><span style="font-size:18px; color:#ccc;">Keep an eye on your Fullness 🍽️ so you don’t max out</span>`;
+      break;
+    case 'pleasure_zero':
+      msg = `Life felt too dull without tasty food <br><span style="font-size:18px; color:#ccc;">Mix in a few fun meals 😋 to stay motivated</span>`;
+      break;
+    case 'fat_max':
+      msg = `Your health gave out from too much Fat 🧈 <br><span style="font-size:18px; color:#ccc;">Balance indulgent foods with lighter choices</span>`;
+      break;
+    case 'protein_zero':
+      msg = `Your body weakened without enough Protein 🍗 <br><span style="font-size:18px; color:#ccc;">Add more protein-rich meals to stay strong</span>`;
+      break;
+    case 'vit_zero':
+      msg = `You got sick from a lack of Vitamins 🥦 <br><span style="font-size:18px; color:#ccc;">Don’t forget fruits and veggies to stay healthy</span>`;
+      break;
+    case 'money_zero':
+      msg = `You ran out of cash 💰 and couldn’t buy food <br><span style="font-size:18px; color:#ccc;">Budget your meals so the money lasts longer</span>`;
+      break;
+  }
+
   document.getElementById('game-over-msg').innerHTML = msg;
 
   document.getElementById('days-survived').innerHTML = 
-    `You survived <strong>${day} day${day > 1 ? 's' : ''}</strong>!`;
+    `You survived <strong>${day} day${day > 1 ? 's' : ''}</strong>`
 
   if(day > highScore) highScore = day;
 
   document.getElementById('high-score').innerHTML = 
-    `🏆 High Score: <strong>${highScore} day${highScore > 1 ? 's' : ''}</strong>`;
+    `🏆 High Score: <strong>${highScore} day${highScore > 1 ? 's' : ''}</strong>`
 
   document.getElementById('game-over-modal').style.display = 'flex';
 }
+
 
 
 
