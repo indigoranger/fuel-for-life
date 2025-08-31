@@ -198,9 +198,9 @@
 <body>
 
 <div class="game-container">
-  <audio id="meal-sound" src="meal.mp3"></audio>
-  <audio id="happy-sound" src="happychoice.mp3"></audio>
-  <audio id="sad-sound" src="sadchoice.mp3"></audio>
+  <audio id="gameover-sound" src="gameover.mp3"></audio>
+  <audio id="happy-sound" src="happymeal.mp3"></audio>
+  <audio id="sad-sound" src="sadmeal.mp3"></audio>
 
   <!-- Splash screen -->
   <div class="splash-screen" id="splash-screen">
@@ -446,7 +446,6 @@ function getRandomMeals() {
 }
 
 function renderMeals() {
-  mealSound.play();
   const mealsDiv = document.getElementById('meal-options');
   mealsDiv.innerHTML = '';
   const options = getRandomMeals();
@@ -509,24 +508,36 @@ if (food.effects.vit) vit += food.effects.vit;
   else consecutiveFullnessMax = 0;
 
   clampValues();
-  playChoiceSound(old);
+  playChoiceSound();
   checkGameOver();
   updateMeters();
   renderMeals();
 }
 
-function playChoiceSound(old) {
-  const majorityDown = (
-    (fullness < old.fullness ? 1 : 0) +
-    (pleasure < old.pleasure ? 1 : 0) +
-    (protein < old.protein ? 1 : 0) +
-    (vit < old.vit ? 1 : 0) +
-    (carbs > old.carbs ? 1 : 0)
-  ) >= 3;
+function playChoiceSound() {
+  function isRed(value, type) {
+    if (type === 'fullness') return value < 30 || value > 90;
+    if (type === 'pleasure') return value < 30;
+    if (type === 'carbs') return value < 30 || value > 90;
+    if (type === 'fat') return value < 20 || value > 90;
+    if (type === 'protein' || type === 'vit') return value < 30;
+    return false;
+  }
 
-  if(majorityDown) sadSound.play();
-  else happySound.play();
+  const anyRed = isRed(fullness, 'fullness') ||
+                 isRed(pleasure, 'pleasure') ||
+                 isRed(carbs, 'carbs') ||
+                 isRed(protein, 'protein') ||
+                 isRed(fat, 'fat') ||
+                 isRed(vit, 'vit');
+
+  if (anyRed) {
+    sadSound.play();
+  } else {
+    happySound.play();
+  }
 }
+
 
 function clampValues() {
   if(carbs > 100) {
@@ -574,6 +585,9 @@ function checkGameOver() {
 
 
 function showGameOver(msg) {
+  const gameOverSound = document.getElementById('gameover-sound');
+  gameOverSound.play(); // Play the game over sound
+
   document.getElementById('game-over-msg').textContent = msg;
   
   // Bold full "X days"
