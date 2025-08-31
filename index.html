@@ -400,6 +400,71 @@ const mealSound = document.getElementById('meal-sound');
 const happySound = document.getElementById('happy-sound');
 const sadSound = document.getElementById('sad-sound');
 
+const surpriseEvents = [
+  {
+    name: "Food Poisoning",
+    effect: () => {
+      fullness = 20;
+      pleasure = 20;
+      fat = Math.max(0, fat - 20);
+      carbs = 10;
+      vit = 30;
+      protein = Math.max(0, protein - 10);
+      showNotification(`
+        🤢 Oh no! That last meal didn’t sit well. You feel less satisfied with food for a while.<br><br>
+        <span style="color:red;">Fullness low</span><br>
+        <span style="color:red;">Pleasure low</span><br>
+        <span style="color:red;">Carbs low</span><br>
+        <span style="color:red;">Vitamins low</span><br>
+      `);
+    }
+  },
+  {
+    name: "Flu",
+    effect: () => {
+      vit = 10;
+      fullness = 20;
+      pleasure = 20;
+      fat = Math.max(0, fat - 10);
+      carbs = 10;
+      protein = Math.max(0, protein - 10);
+      showNotification(`
+        🤧 You caught the flu! You feel weak and less energized.<br><br>
+        <span style="color:red;">Vitamins low</span><br>
+        <span style="color:red;">Fullness low</span><br>
+        <span style="color:red;">Pleasure low</span><br>
+        <span style="color:red;">Carbs low</span><br>
+       
+      `);
+    }
+  },
+  {
+    name: "Muscle Strain",
+    effect: () => {
+      protein = 20;
+      showNotification(`
+        💪 Ouch! Your body feels weaker than usual, protein won’t be as effective today.<br><br>
+        <span style="color:red;">Protein low</span>
+      `);
+    }
+  }
+];
+
+let turnsSinceLastEvent = 0;
+const minTurnsForEvent = 7; // Minimum meals before next event
+
+function triggerDailyEvent() {
+  if(turnsSinceLastEvent >= minTurnsForEvent) {
+    const chance = 0.3; // 30% chance for a surprise event
+    if(Math.random() < chance) {
+      const event = surpriseEvents[Math.floor(Math.random() * surpriseEvents.length)];
+      event.effect();
+      turnsSinceLastEvent = 0;
+    }
+  }
+}
+
+
 function startGame() {
   document.getElementById('splash-screen').style.display = 'none';
   document.getElementById('instructions-screen').style.display = 'none';
@@ -546,8 +611,13 @@ if (food.effects.vit) vit += food.effects.vit;
   pleasure += food.effects.pleasure;
   money -= food.cost;
 
-  mealsEaten++;
-  if(mealsEaten % 3 === 0) day++;
+mealsEaten++;
+if(mealsEaten % 3 === 0) {
+  day++;
+  triggerDailyEvent(); // check for surprise event at start of new day
+}
+turnsSinceLastEvent++;
+
 
   if(mealsEaten % 21 === 0) {
     money += 150;
