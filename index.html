@@ -597,13 +597,15 @@ function updateStatusMessage() {
 
   if (fullness >= 90) {
     message = "🍽️ Your stomach is getting too full, watch out! <span class='big-emoji'>😧</span>";
-  } else if (fullness <= 20) {
+  } else if (money < 20) {
+    message = "💰 You’re nearly out of money! <span class='big-emoji'>😧</span>";
+  } else if (fullness <= 30) {
     message = "🍽️ Your stomach’s almost empty! <span class='big-emoji'>😧</span>";
-  } else if (pleasure <= 20) {
+  } else if (pleasure <= 30) {
     message = "😔 Food feels dull… grab something tasty soon! <span class='big-emoji'>😧</span>";
-  } else if (protein <= 20) {
+  } else if (protein <= 30) {
     message = "🍗 Your protein is dangerously low. <span class='big-emoji'>😧</span>";
-  } else if (vit <= 20) {
+  } else if (vit <= 30) {
     message = "🥦 You need vitamins, try fruits or veggies! <span class='big-emoji'>😧</span>";
   } else if (fat >= 70) {
     message = "🧈 Your fat levels are climbing too high! <span class='big-emoji'>😧</span>";
@@ -611,7 +613,10 @@ function updateStatusMessage() {
     message = "🧈 You are running low on healthy fats! <span class='big-emoji'>😧</span>";
   } else if (money < 30) {
     message = "💰 You’re nearly out of money! <span class='big-emoji'>😧</span>";
+  } else if (carbs <= 25) {
+    message = "🍞 Your carbs is dangerously low. <span class='big-emoji'>😧</span>";
   }
+  
 
   document.getElementById("status-message").innerHTML = message;
 }
