@@ -74,6 +74,10 @@
   margin-right: 16px; /* increase space from left edge */
 }
 
+.big-emoji {
+  font-size: 1.8em; /* adjust to taste */
+  vertical-align: middle; /* keeps it aligned nicely with text */
+}
 
 
 
@@ -343,7 +347,7 @@
   <!-- Main game UI -->
   <div id="game-ui">
     <div class="top-bar">
-      <div class="metric" id="weight-display">🧍🏻‍♂️ 70kg</div>
+      <div class="metric" id="weight-display">🧍🏻‍♂️ 140 lbs</div>
       <div class="metric" id="money-display">💰 $200</div>
     </div>
 
@@ -438,6 +442,7 @@ let consecutiveFullnessMax = 0;
 let highScore = 0; // 
 let hasStartedMeals = false; // controls animation after first meal
 let lowMoneyWarned = false;
+let gameOver = false;
 
 
 const mealTitles = ["Breakfast","Lunch","Dinner"];
@@ -462,7 +467,7 @@ const surpriseEvents = [
   <span style="color:#f44336;">Pleasure low</span><br>
   <span style="color:#f44336;">Carbs low</span><br>
   <span style="color:#f44336;">Vitamins low</span><br>
-`, "Food Poisoning!");
+`, "Food Poisoning! 🤢");
 
     }
   },
@@ -476,12 +481,12 @@ const surpriseEvents = [
       carbs = 10;
       protein = Math.max(0, protein - 10);
       showNotification(`
-        🤧 You caught the flu! You feel weak and less energized.<br><br>
+        You caught the flu! You feel weak and less energized.<br><br>
         <span style="color:#f44336;">Vitamins low</span><br>
         <span style="color:#f44336;">Fullness low</span><br>
         <span style="color:#f44336;">Pleasure low</span><br>
         <span style="color:#f44336;">Carbs low</span><br>
-      `, "Flu!");
+      `, "Flu! 🤧");
     }
   },
   {
@@ -489,9 +494,9 @@ const surpriseEvents = [
     effect: () => {
       protein = 20;
       showNotification(`
-        💪 Ouch! Your body feels weaker than usual, protein won’t be as effective today.<br><br>
+        Ouch! Your body feels weaker than usual, protein won’t be as effective today.<br><br>
         <span style="color:#f44336;">Protein low</span>
-      `, "Muscle Strain!");
+      `, "Muscle Strain! 💪");
     }
   }
 ];
@@ -588,28 +593,29 @@ function updateMeters() {
 
 
 function updateStatusMessage() {
-  let message = "You're doing fine, keep balancing your meals!";
+  let message = "You're doing fine, keep balancing your meals! <span class='big-emoji'>😊</span>";
 
   if (fullness >= 90) {
-    message = "⚠️ You’re getting too full, watch out!";
+    message = "🍽️ Your stomach is getting too full, watch out! <span class='big-emoji'>😧</span>";
   } else if (fullness <= 20) {
-    message = "⚠️ You’re running low on fullness!";
+    message = "🍽️ Your stomach’s almost empty! <span class='big-emoji'>😧</span>";
   } else if (pleasure <= 20) {
-    message = "😔 Food feels dull… grab something tasty soon!";
+    message = "😔 Food feels dull… grab something tasty soon! <span class='big-emoji'>😧</span>";
   } else if (protein <= 20) {
-    message = "💪 Your protein is dangerously low.";
+    message = "🍗 Your protein is dangerously low. <span class='big-emoji'>😧</span>";
   } else if (vit <= 20) {
-    message = "🥦 You need vitamins, try fruits or veggies!";
+    message = "🥦 You need vitamins, try fruits or veggies! <span class='big-emoji'>😧</span>";
   } else if (fat >= 70) {
-    message = "🧈 Your fat levels are climbing too high.";
-} else if (fat <= 20) {
-    message = "🧈 Your are running low on healthy fats";
+    message = "🧈 Your fat levels are climbing too high! <span class='big-emoji'>😧</span>";
+  } else if (fat <= 20) {
+    message = "🧈 You are running low on healthy fats! <span class='big-emoji'>😧</span>";
   } else if (money < 30) {
-    message = "💰 You’re nearly out of money!";
+    message = "💰 You’re nearly out of money! <span class='big-emoji'>😧</span>";
   }
 
-  document.getElementById("status-message").textContent = message;
+  document.getElementById("status-message").innerHTML = message;
 }
+
 
 
 function getRandomMeals() {
@@ -735,7 +741,7 @@ const daysLeft = Math.ceil(mealsLeftBeforeAllowance / 3); // 3 meals per day
 
 if (!lowMoneyWarned && money < 40 && mealsLeftBeforeAllowance > 3) {
   showNotification(
-    `Spend carefully! Your next allowance arrives in ${daysLeft} day${daysLeft > 1 ? 's' : ''}. Budget carefully until then.`, "Short on Cash"
+    `Spend carefully! Your next allowance arrives in ${daysLeft} day${daysLeft > 1 ? 's' : ''}. Budget carefully until then.`, "Short on Cash 💰"
   );
   lowMoneyWarned = true;
 }
@@ -785,7 +791,9 @@ function clampValues() {
   if(carbs > 100) {
     carbs = 50;
     fat = Math.min(100, fat + 4);
-    showNotification("🍞 Too many carbs! Your body converted some into 🧈 fat.", "Carbs → Fat");
+    if (!gameOver) {
+      showNotification("🍞 Too many carbs! Your body converted some into 🧈 fat.", "Carbs 🍞 → Fat 🧈");
+    }
 
 
   }
@@ -816,7 +824,13 @@ function checkGameOver() {
 
 
 function showGameOver(msgType) {
-  const gameOverSound = document.getElementById('gameover-sound');
+  
+  if (gameOver) return; // ✅ Prevent multiple triggers
+  gameOver = true;
+
+  document.getElementById('notification-modal').style.display = 'none';
+
+const gameOverSound = document.getElementById('gameover-sound');
   gameOverSound.play(); 
 
   let msg = '';
@@ -829,10 +843,10 @@ function showGameOver(msgType) {
       msg = `Your body couldn’t handle all that overeating <br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Watch your Fullness 🍽️ and pace your meals</span>`;
       break;
     case 'fullness_max':
-      msg = `That last meal was too much to handle <br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Keep an eye on your Fullness 🍽️ so you don’t max out</span>`;
+      msg = `That last meal was too much to handle 🤮<br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Keep an eye on your Fullness 🍽️ so you don’t max out</span>`;
       break;
     case 'pleasure_zero':
-      msg = `Life felt too dull without tasty food <br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Mix in a few fun meals 😋 to stay motivated</span>`;
+      msg = `Life felt too dull without tasty food 😞<br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Mix in a few fun meals to stay motivated</span>`;
       break;
     case 'fat_max':
       msg = `Your health gave out from too much Fat 🧈 <br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Balance indulgent foods with lighter choices</span>`;
@@ -875,11 +889,13 @@ function backToMainMenu() {
   document.getElementById('game-ui').style.display = 'none';
   fullness = 50; pleasure = 50; carbs = 50; protein = 50; fat = 25; vit = 50; money = 200; // <-- changed
   day = 1; mealsEaten = 0; consecutiveFullnessMax = 0;
+  gameOver = false; // ✅ Reset flag here
   updateMeters();
 }
 
 
 function showNotification(msg, title = "Alert") {
+  if (gameOver) return; // ✅ Ignore notifications after game over
   document.getElementById('notification-msg').innerHTML = msg;
   document.getElementById('notification-title').textContent = title;
   document.getElementById('notification-modal').style.display = 'flex';
