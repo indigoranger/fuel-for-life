@@ -379,6 +379,11 @@
       </div>
     </div>
 
+<div id="status-message" style="text-align:center; font-size:14px; margin:10px 0; color:#ffd633;">
+  Stay balanced and keep eating smart!
+</div>
+
+
     <div class="current-meal-wrapper">
   <div class="current-meal" id="current-meal">Day 1 - Breakfast</div>
 </div>
@@ -576,7 +581,36 @@ function updateMeters() {
   document.getElementById('vit-fill').style.backgroundColor = meterColor(vit, 'vit');
   document.getElementById('money-display').textContent = `💰 $${money}`;
   updateWeight();
+
+  updateStatusMessage();
+
 }
+
+
+function updateStatusMessage() {
+  let message = "You're doing fine, keep balancing your meals!";
+
+  if (fullness >= 90) {
+    message = "⚠️ You’re getting too full, watch out!";
+  } else if (fullness <= 20) {
+    message = "⚠️ You’re running low on fullness!";
+  } else if (pleasure <= 20) {
+    message = "😔 Food feels dull… grab something tasty soon!";
+  } else if (protein <= 20) {
+    message = "💪 Your protein is dangerously low.";
+  } else if (vit <= 20) {
+    message = "🥦 You need vitamins, try fruits or veggies!";
+  } else if (fat >= 70) {
+    message = "🧈 Your fat levels are climbing too high.";
+} else if (fat <= 20) {
+    message = "🧈 Your are running low on healthy fats";
+  } else if (money < 30) {
+    message = "💰 You’re nearly out of money!";
+  }
+
+  document.getElementById("status-message").textContent = message;
+}
+
 
 function getRandomMeals() {
   const options = [];
