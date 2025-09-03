@@ -825,6 +825,7 @@ function checkGameOver() {
   const affordable = foodCatalog.some(f => f.cost <= money);
   if(!affordable) return showGameOver('money_zero');
   if(fat === 0) return showGameOver('fat_zero');
+  if(carbs === 0) return showGameOver('carbs_zero');
 
 }
 
@@ -868,7 +869,10 @@ const gameOverSound = document.getElementById('gameover-sound');
       msg = `You ran out of cash 💰 and couldn’t buy food <br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Budget your meals so the money lasts longer</span>`;
       break;
     case 'fat_zero':
-  msg = `You ran out of essential Fat 🧈 <br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Make sure to eat enough healthy fats to survive</span>`;
+      msg = `You ran out of essential Fat 🧈 <br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Make sure to eat enough healthy fats to survive</span>`;
+  break;
+    case 'carbs_zero':
+  msg = `You ran out of essential carbs 🍞 <br><span style="display:block; font-size:18px; color:#ccc; padding-top:20px;">Make sure to eat enough carbs to survive</span>`;
   break;
 
   }
