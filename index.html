@@ -263,7 +263,7 @@
   <!-- Splash screen -->
   <div class="splash-screen" id="splash-screen">
     <h1>Fuel for Life</h1>
-    <p>Balance your nutrients, keep your body healthy, and survive as long as you can!</p>
+    <p>Balance your nutrients, keep your body healthy, and <strong>survive as long as you can!</strong></p>
     <button onclick="startGame()">Start Game</button>
     <a onclick="showInstructions()">Instructions</a>
   </div>
@@ -275,7 +275,7 @@
  <div class="instructions-screen" id="instructions-screen" style="display:none;">
   <h1 style="font-size:32px; color:#ffcc00; margin-bottom:20px; text-align:center;">Fuel for Life</h1>
   <p style="font-size:16px; line-height:1.6; color:#ccc;">
-    Welcome, foodaholic! Your mission is to thrive by carefully managing your <strong>nutrients</strong>, <strong>fullness</strong>, and <strong>pleasure</strong>, while keeping track of your 💰 <em>resources</em>. Every meal choice matters. Plan strategically to survive as long as possible.
+    Welcome, foodaholic! Your mission is to survive the longest by carefully managing your <strong>nutrients</strong>, <strong>fullness</strong>, and <strong>pleasure</strong>, while keeping track of your 💰 <em>resources</em>. Every meal choice matters. Plan strategically to survive as long as possible.
   </p>
 
   <h2 style="font-size:24px; color:#ffd633; margin-top:25px;">📋 Your Meters</h2>
@@ -431,7 +431,7 @@ const foodCatalog = [
   {name:"Chocolate Cake", emoji:"🍰", effects:{carbs:20, protein:3, fat:12, vit:-3, fullness:3, pleasure:20}, nutrients:["carbs","protein","fat","pleasure"], cost:15},
   {name:"Avocado Toast", emoji:"🥑", effects:{carbs:8, protein:3, fat:2, vit:5, fullness:7, pleasure:7}, nutrients:["carbs","vit","fullness"], cost:10},
   {name:"Eggs & Bacon", emoji:"🥓🥚", effects:{carbs:-6, protein:10, fat:12, vit:2, fullness:9, pleasure:10}, nutrients:["protein","fat","fullness","pleasure"], cost:14},
-  {name:"Granola Bar", emoji:"🥖", effects:{carbs:8, protein:7, fat:2, vit:2, fullness:3, pleasure:5}, nutrients:["carbs","protein"], cost:5},
+  {name:"Granola Bar", emoji:"🥖", effects:{carbs:8, protein:7, fat:2, vit:2, fullness:3, pleasure:-3}, nutrients:["carbs","protein"], cost:5},
   {name:"Tomato Soup", emoji:"🍅", effects:{carbs:6, protein:2, fat:-6, vit:5, fullness:3, pleasure:-5}, nutrients:["carbs","vit"], cost:6},
   {name:"Ice Cream", emoji:"🍦", effects:{carbs:12, protein:1, fat:8, vit:-2, fullness:6, pleasure:15}, nutrients:["carbs","fat","fullness","pleasure"], cost:8},
   {name:"Nuts Mix", emoji:"🥜", effects:{carbs:2, protein:5, fat:10, vit:2, fullness:4, pleasure:7}, nutrients:["protein","fat","vit","fullness"], cost:9}
@@ -603,7 +603,7 @@ function updateStatusMessage() {
   } else if (fullness <= 30) {
     message = "🍽️ Your stomach’s almost empty! <span class='big-emoji'>😧</span>";
   } else if (pleasure <= 30) {
-    message = "😔 Food feels dull… grab something tasty soon! <span class='big-emoji'>😧</span>";
+    message = "Food feels dull… grab something tasty soon! <span class='big-emoji'>😧</span>";
   } else if (protein <= 30) {
     message = "🍗 Your protein is dangerously low. <span class='big-emoji'>😧</span>";
   } else if (vit <= 30) {
